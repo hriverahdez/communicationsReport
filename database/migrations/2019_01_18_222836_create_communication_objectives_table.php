@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Enums;
 
-class CreateCommunicationsObjectivesTable extends Migration
+class CreateCommunicationObjectivesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +14,10 @@ class CreateCommunicationsObjectivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('communications_objectives', function (Blueprint $table) {
+        Schema::create('communication_objectives', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->enum('type', Enums::COMMUNICATION_OBJECTIVE_TYPES);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateCommunicationsObjectivesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('communications_objectives');
+        Schema::dropIfExists('communication_objectives');
     }
 }

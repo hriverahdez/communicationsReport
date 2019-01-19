@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\CommunicationsObjective;
+use App\CommunicationReport;
 use Illuminate\Http\Request;
 
-class CommunicationsObjectiveController extends Controller
+class CommunicationReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CommunicationsObjectiveController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\CommunicationsObjective  $communicationsObjective
+     * @param  \App\CommunicationReport  $communicationReport
      * @return \Illuminate\Http\Response
      */
-    public function show(CommunicationsObjective $communicationsObjective)
+    public function show(CommunicationReport $communicationReport)
     {
         //
     }
@@ -52,10 +52,10 @@ class CommunicationsObjectiveController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\CommunicationsObjective  $communicationsObjective
+     * @param  \App\CommunicationReport  $communicationReport
      * @return \Illuminate\Http\Response
      */
-    public function edit(CommunicationsObjective $communicationsObjective)
+    public function edit(CommunicationReport $communicationReport)
     {
         //
     }
@@ -64,10 +64,10 @@ class CommunicationsObjectiveController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CommunicationsObjective  $communicationsObjective
+     * @param  \App\CommunicationReport  $communicationReport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CommunicationsObjective $communicationsObjective)
+    public function update(Request $request, CommunicationReport $communicationReport)
     {
         //
     }
@@ -75,10 +75,10 @@ class CommunicationsObjectiveController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\CommunicationsObjective  $communicationsObjective
+     * @param  \App\CommunicationReport  $communicationReport
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CommunicationsObjective $communicationsObjective)
+    public function destroy(CommunicationReport $communicationReport)
     {
         //
     }
