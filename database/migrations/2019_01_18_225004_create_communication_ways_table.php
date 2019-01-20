@@ -17,7 +17,7 @@ class CreateCommunicationWaysTable extends Migration
         Schema::create('communication_ways', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('type', Enums::COMMUNICATION_WAY_TYPES);
-            $table->string('contact_number');
+            $table->string('contact_number')->nullable();
 
             $table->unsignedInteger('communication_objective_id');
             $table->foreign('communication_objective_id')
