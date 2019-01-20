@@ -19,6 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
 
-    Route::resource('communication_objective', 'CommunicationObjectiveController');
+		Route::resource('communication_objective', 'CommunicationObjectiveController');
+		Route::resource('communication_way', 'CommunicationWayController');
+
+		Route::prefix('communication_report')->group(function () {
+			Route::get('latest', 'CommunicationReportController@latestReports');
+		});
+
+		Route::resource('communication_report', 'CommunicationReportController');
 
 });
