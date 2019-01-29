@@ -1,0 +1,48 @@
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<comms-card padding="7">
+				<div class="col-xs-2">
+					<button type="button" class="btn btn-primary btn-fill">
+						<i class="ti-write"></i>
+						Realizar reporte
+					</button>
+				</div>
+
+				<div class="col-xs-10">
+					<input type="text" class="form-control border-input" placeholder="Jane Doe">					
+				</div>
+			</comms-card>
+		</div>
+	</div>
+
+	<div class="row" *ngIf="reports$ | async as allReports">
+		<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let report of getIterableData(allReports)">
+				<comms-card>
+					<comms-card-header
+						[title]="report.name">						
+					</comms-card-header>
+					<comms-card-body>
+
+						<ul class="list-group">
+							<a 
+								*ngFor="let date of report.dates"
+								[routerLink]="['/comms/reports/details', report.id]"
+								class="list-group-item list-group-item-action">
+								<i class="ti-clipboard"></i>
+								Reporte del: <strong>{{ date | date:'dd/MM/yyyy' }}</strong>
+							</a>						
+						</ul>						
+						
+						<!-- <comms-card-footer>						
+							<hr>
+							<div class="stats">
+								<i class="ti-reload"></i> Última actualización: {{ commObj.updated_at | date:'short' }}
+							</div>
+						</comms-card-footer> -->
+					</comms-card-body>
+				</comms-card>
+		</div>
+	</div>
+</div>

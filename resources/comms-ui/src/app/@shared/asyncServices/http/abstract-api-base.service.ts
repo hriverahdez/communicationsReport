@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { ApiSuccessResponse, ApiErrorResponse } from '../../models';
+import { ApiResponse } from '../../models';
 import { environment } from '../../../../environments/environment';
 
 /**
@@ -50,11 +50,11 @@ export class AbstractApiBaseService {
 	get<T>(
 		url: string,
 		isRelativeUrl: boolean = true
-	): Observable<T | ApiSuccessResponse<T> | ApiErrorResponse> {
+	): Observable<T | ApiResponse<T>> {
 		const finalUrl = isRelativeUrl ? `${this.apiUrl}/${url}` : url;
 
 		return this.http
-			.get<T>(finalUrl, this.headers)
+			.get<T | ApiResponse<T>>(finalUrl, this.headers)
 			.pipe(catchError(error => this.recoverError(error)));
 	}
 
@@ -73,7 +73,7 @@ export class AbstractApiBaseService {
 		url: string,
 		data: {},
 		isRelativeUrl: boolean = true
-	): Observable<T | ApiSuccessResponse<T> | ApiErrorResponse> {
+	): Observable<T | ApiResponse<T>> {
 		const finalUrl = isRelativeUrl ? `${this.apiUrl}/${url}` : url;
 
 		return this.http
@@ -114,7 +114,7 @@ export class AbstractApiBaseService {
 		url: string,
 		data: {},
 		isRelativeUrl: boolean = true
-	): Observable<T | ApiSuccessResponse<T> | ApiErrorResponse> {
+	): Observable<T | ApiResponse<T>> {
 		const finalUrl = isRelativeUrl ? `${this.apiUrl}/${url}` : url;
 
 		return this.http

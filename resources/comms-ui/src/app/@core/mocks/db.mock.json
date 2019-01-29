@@ -1,0 +1,432 @@
+{
+	"latest": {
+    "Benito Juarez": [
+        {
+            "id": 18,
+            "status": "GOOD",
+            "details": null,
+            "date": "2019-01-23",
+            "communication_objective_id": 2,
+            "communication_way_id": 5,
+            "created_at": "2019-01-20 19:03:48",
+            "updated_at": "2019-01-20 19:03:48",
+            "objective_name": "Benito Juarez",
+            "objective_type": "GEA",
+            "way_type": "CELLPHONE",
+            "contact_number": "52837158"
+        },
+        {
+            "id": 17,
+            "status": "GOOD",
+            "details": null,
+            "date": "2019-01-23",
+            "communication_objective_id": 2,
+            "communication_way_id": 4,
+            "created_at": "2019-01-20 19:03:48",
+            "updated_at": "2019-01-20 19:03:48",
+            "objective_name": "Benito Juarez",
+            "objective_type": "GEA",
+            "way_type": "TRUNKING",
+            "contact_number": "132-6547-987"
+        }
+    ],
+    "Bateria Sandino": [
+        {
+            "id": 15,
+            "status": "BAD",
+            "details": null,
+            "date": "2019-01-23",
+            "communication_objective_id": 1,
+            "communication_way_id": 2,
+            "created_at": "2019-01-20 19:03:48",
+            "updated_at": "2019-01-20 19:03:48",
+            "objective_name": "Bateria Sandino",
+            "objective_type": "BATTERY",
+            "way_type": "CELLPHONE",
+            "contact_number": "52837158"
+        },
+        {
+            "id": 16,
+            "status": "REGULAR",
+            "details": null,
+            "date": "2019-01-23",
+            "communication_objective_id": 1,
+            "communication_way_id": 3,
+            "created_at": "2019-01-20 19:03:48",
+            "updated_at": "2019-01-20 19:03:48",
+            "objective_name": "Bateria Sandino",
+            "objective_type": "BATTERY",
+            "way_type": "FM",
+            "contact_number": null
+        }
+    ]
+	},
+	"communication_objective": {
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "name": "Bateria Sandino",
+            "type": "BATTERY",
+            "created_at": "2019-01-20 18:07:52",
+            "updated_at": "2019-01-20 18:07:52",
+            "communication_ways": [
+                {
+                    "id": 1,
+                    "type": "TRUNKING",
+                    "contact_number": "132-6547-987",
+                    "communication_objective_id": 1,
+                    "created_at": "2019-01-20 18:07:52",
+                    "updated_at": "2019-01-20 18:07:52"
+                },
+                {
+                    "id": 2,
+                    "type": "CELLPHONE",
+                    "contact_number": "52837158",
+                    "communication_objective_id": 1,
+                    "created_at": "2019-01-20 18:07:52",
+                    "updated_at": "2019-01-20 18:07:52"
+                },
+                {
+                    "id": 3,
+                    "type": "FM",
+                    "contact_number": null,
+                    "communication_objective_id": 1,
+                    "created_at": "2019-01-20 18:07:52",
+                    "updated_at": "2019-01-20 18:07:52"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Benito Juarez",
+            "type": "GEA",
+            "created_at": "2019-01-20 18:07:52",
+            "updated_at": "2019-01-20 18:07:52",
+            "communication_ways": [
+                {
+                    "id": 4,
+                    "type": "TRUNKING",
+                    "contact_number": "132-6547-987",
+                    "communication_objective_id": 2,
+                    "created_at": "2019-01-20 18:07:52",
+                    "updated_at": "2019-01-20 18:07:52"
+                },
+                {
+                    "id": 5,
+                    "type": "CELLPHONE",
+                    "contact_number": "52837158",
+                    "communication_objective_id": 2,
+                    "created_at": "2019-01-20 18:07:52",
+                    "updated_at": "2019-01-20 18:07:52"
+                },
+                {
+                    "id": 6,
+                    "type": "INTERNAL_PHONE",
+                    "contact_number": "26166",
+                    "communication_objective_id": 2,
+                    "created_at": "2019-01-20 18:07:52",
+                    "updated_at": "2019-01-20 18:07:52"
+                },
+                {
+                    "id": 7,
+                    "type": "EXTERNAL_PHONE",
+                    "contact_number": "48754989",
+                    "communication_objective_id": 2,
+                    "created_at": "2019-01-20 18:07:52",
+                    "updated_at": "2019-01-20 18:07:52"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Paso Real",
+            "type": "SUB_STATION",
+            "created_at": "2019-01-20 18:07:52",
+            "updated_at": "2019-01-20 18:07:52",
+            "communication_ways": []
+        }
+    ]
+	},
+	"communication_report": {
+    "success": true,
+    "data": {
+        "1": {
+            "2019-01-20": [
+                {
+                    "id": 1,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-20",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 1,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "TRUNKING",
+                    "contact_number": "132-6547-987"
+                },
+                {
+                    "id": 2,
+                    "status": "BAD",
+                    "details": null,
+                    "date": "2019-01-20",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 2,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "CELLPHONE",
+                    "contact_number": "52837158"
+                },
+                {
+                    "id": 3,
+                    "status": "REGULAR",
+                    "details": null,
+                    "date": "2019-01-20",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 3,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "FM",
+                    "contact_number": null
+                }
+            ],
+            "2019-01-21": [
+                {
+                    "id": 7,
+                    "status": "BAD",
+                    "details": null,
+                    "date": "2019-01-21",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 2,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "CELLPHONE",
+                    "contact_number": "52837158"
+                },
+                {
+                    "id": 8,
+                    "status": "REGULAR",
+                    "details": null,
+                    "date": "2019-01-21",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 3,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "FM",
+                    "contact_number": null
+                }
+            ],
+            "2019-01-22": [
+                {
+                    "id": 11,
+                    "status": "BAD",
+                    "details": null,
+                    "date": "2019-01-22",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 2,
+                    "created_at": "2019-01-20 18:48:45",
+                    "updated_at": "2019-01-20 18:48:45",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "CELLPHONE",
+                    "contact_number": "52837158"
+                },
+                {
+                    "id": 14,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-22",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 3,
+                    "created_at": "2019-01-20 18:48:45",
+                    "updated_at": "2019-01-20 18:48:45",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "FM",
+                    "contact_number": null
+                }
+            ],
+            "2019-01-23": [
+                {
+                    "id": 15,
+                    "status": "BAD",
+                    "details": null,
+                    "date": "2019-01-23",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 2,
+                    "created_at": "2019-01-20 19:03:48",
+                    "updated_at": "2019-01-20 19:03:48",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "CELLPHONE",
+                    "contact_number": "52837158"
+                },
+                {
+                    "id": 16,
+                    "status": "REGULAR",
+                    "details": null,
+                    "date": "2019-01-23",
+                    "communication_objective_id": 1,
+                    "communication_way_id": 3,
+                    "created_at": "2019-01-20 19:03:48",
+                    "updated_at": "2019-01-20 19:03:48",
+                    "objective_name": "Bateria Sandino",
+                    "objective_type": "BATTERY",
+                    "way_type": "FM",
+                    "contact_number": null
+                }
+            ]
+        },
+        "2": {
+            "2019-01-20": [
+                {
+                    "id": 4,
+                    "status": "BAD",
+                    "details": null,
+                    "date": "2019-01-20",
+                    "communication_objective_id": 2,
+                    "communication_way_id": 1,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Benito Juarez",
+                    "objective_type": "GEA",
+                    "way_type": "TRUNKING",
+                    "contact_number": "132-6547-987"
+                },
+                {
+                    "id": 5,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-20",
+                    "communication_objective_id": 2,
+                    "communication_way_id": 2,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Benito Juarez",
+                    "objective_type": "GEA",
+                    "way_type": "CELLPHONE",
+                    "contact_number": "52837158"
+                },
+                {
+                    "id": 6,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-20",
+                    "communication_objective_id": 2,
+                    "communication_way_id": 3,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Benito Juarez",
+                    "objective_type": "GEA",
+                    "way_type": "FM",
+                    "contact_number": null
+                }
+            ],
+            "2019-01-21": [
+                {
+                    "id": 9,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-21",
+                    "communication_objective_id": 2,
+                    "communication_way_id": 2,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Benito Juarez",
+                    "objective_type": "GEA",
+                    "way_type": "CELLPHONE",
+                    "contact_number": "52837158"
+                },
+                {
+                    "id": 10,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-21",
+                    "communication_objective_id": 2,
+                    "communication_way_id": 3,
+                    "created_at": "2019-01-20 18:12:38",
+                    "updated_at": "2019-01-20 18:12:38",
+                    "objective_name": "Benito Juarez",
+                    "objective_type": "GEA",
+                    "way_type": "FM",
+                    "contact_number": null
+                }
+            ],
+            "2019-01-22": [
+                {
+                    "id": 12,
+                    "status": "REGULAR",
+                    "details": null,
+                    "date": "2019-01-22",
+                    "communication_objective_id": 2,
+                    "communication_way_id": 3,
+                    "created_at": "2019-01-20 18:48:45",
+                    "updated_at": "2019-01-20 18:48:45",
+                    "objective_name": "Benito Juarez",
+                    "objective_type": "GEA",
+                    "way_type": "FM",
+                    "contact_number": null
+                }
+            ],
+            "2019-01-23": [
+                {
+                    "id": 17,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-23",
+                    "communication_objective_id": 2,
+                    "communication_way_id": 4,
+                    "created_at": "2019-01-20 19:03:48",
+                    "updated_at": "2019-01-20 19:03:48",
+                    "objective_name": "Benito Juarez",
+                    "objective_type": "GEA",
+                    "way_type": "TRUNKING",
+                    "contact_number": "132-6547-987"
+                },
+                {
+                    "id": 18,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-23",
+                    "communication_objective_id": 2,
+                    "communication_way_id": 5,
+                    "created_at": "2019-01-20 19:03:48",
+                    "updated_at": "2019-01-20 19:03:48",
+                    "objective_name": "Benito Juarez",
+                    "objective_type": "GEA",
+                    "way_type": "CELLPHONE",
+                    "contact_number": "52837158"
+                }
+            ]
+        },
+        "3": {
+            "2019-01-22": [
+                {
+                    "id": 13,
+                    "status": "GOOD",
+                    "details": null,
+                    "date": "2019-01-22",
+                    "communication_objective_id": 3,
+                    "communication_way_id": 2,
+                    "created_at": "2019-01-20 18:48:45",
+                    "updated_at": "2019-01-20 18:48:45",
+                    "objective_name": "Paso Real",
+                    "objective_type": "SUB_STATION",
+                    "way_type": "CELLPHONE",
+                    "contact_number": "52837158"
+                }
+            ]
+        }
+    }
+	}
+}

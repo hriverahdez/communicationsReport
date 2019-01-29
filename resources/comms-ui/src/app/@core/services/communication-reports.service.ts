@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AbstractCrudService } from '../../@shared/asyncServices/http/abstract-crud.service';
-import { CommunicationObjective } from '../models';
+import {
+	CommunicationsReportSummary,
+	CommunicationReport,
+	CombinedReportSummaries
+} from '../models';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CommunicationReportsService extends AbstractCrudService<
-	CommunicationObjective
+	CommunicationReport
 > {
 	constructor(httpClient: HttpClient) {
 		super(httpClient);
@@ -15,5 +19,13 @@ export class CommunicationReportsService extends AbstractCrudService<
 
 	protected get modelName() {
 		return 'communication_report';
+	}
+
+	getAllReports() {
+		return this.get<CombinedReportSummaries>(`${this.modelName}`);
+	}
+
+	getLatestReports() {
+		return this.get<CommunicationsReportSummary>(`${this.modelName}/latest`);
 	}
 }

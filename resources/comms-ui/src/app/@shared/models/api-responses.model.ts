@@ -1,8 +1,5 @@
-export interface ApiSuccessResponse<T = any | null> {
-	success: boolean;
-	data: T;
-}
-
-export interface ApiErrorResponse {
-	error: any;
+export interface ApiResponse<T = any> {
+	success?: boolean;
+	error?: any;
+	data?: T;
 }

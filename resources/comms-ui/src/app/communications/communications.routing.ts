@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 // containers
 import * as fromContainers from './containers';
 
+// components
+import * as fromComponents from './components';
+
 const ROUTES: Routes = [
 	{
 		path: 'comms',
@@ -11,6 +14,19 @@ const ROUTES: Routes = [
 			{
 				path: '',
 				component: fromContainers.CommunicationsPageComponent
+			},
+			{
+				path: 'reports',
+				children: [
+					{
+						path: '',
+						component: fromContainers.CommunicationReportsPageComponent
+					},
+					{
+						path: 'details/:id',
+						component: fromComponents.CommunicationReportDetailsComponent
+					}
+				]
 			}
 		]
 	}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CommunicationObjectivesService } from '../@core/services/communication-objectives.service';
 import { Observable } from 'rxjs';
 import { CommunicationObjective } from '../@core/models';
-import { ApiSuccessResponse } from '../@shared/models';
+import { ApiResponse } from '../@shared/models';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -18,11 +18,6 @@ export class CommunicationsSandbox {
 	loadCommunicationObjectives() {
 		this.commObjectives$ = this.communicationObjectivesService
 			.items()
-			.pipe(
-				map<
-					ApiSuccessResponse<CommunicationObjective[]>,
-					CommunicationObjective[]
-				>(res => res.data)
-			);
+			.pipe(map((res: ApiResponse<CommunicationObjective[]>) => res.data));
 	}
 }

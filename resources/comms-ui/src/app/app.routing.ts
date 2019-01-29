@@ -41,5 +41,6 @@ export const AppRoutes: Routes = [
 	{
 		path: 'upgrade',
 		component: UpgradeComponent
-	}
+	},
+	{ path: '**', redirectTo: 'dashboard' }
 ];

@@ -36,10 +36,14 @@
       </a>
     </li>
     <li class="divider" *ngIf="isNotMobileMenu"></li>
-    <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+		<li 
+			*ngFor="let menuItem of menuItems"
+			routerLinkActive="active"
+			[routerLinkActiveOptions]="{ exact: menuItem.exactRoute }" 
+			class="{{menuItem.class}}">
       <a [routerLink]="[menuItem.path]">
         <i class="{{menuItem.icon}}"></i>
-        <p>{{menuItem.title}}</p>
+        <p>{{ menuItem.title }}</p>
       </a>
     </li>
   </ul>

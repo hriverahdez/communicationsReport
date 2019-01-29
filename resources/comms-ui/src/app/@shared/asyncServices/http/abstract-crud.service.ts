@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import * as _ from 'lodash';
-import { ApiSuccessResponse, ApiErrorResponse, BaseEntity } from '../../models';
+import { ApiResponse, BaseEntity } from '../../models';
 
 /**
  * Base class of all the services that are backing the data-operations (CRUD operations) of a certain domain entity
@@ -39,9 +39,7 @@ export abstract class AbstractCrudService<
 	 * @returns {Observable<TEntity[]>} which will eventually return the collection of objects of TEntity type coming
 	 * from the backend.
 	 */
-	public items(): Observable<
-		TEntity[] | ApiSuccessResponse<TEntity[]> | ApiErrorResponse
-	> {
+	public items(): Observable<TEntity[] | ApiResponse<TEntity[]>> {
 		return super.get(this.getModelUrl(), false);
 	}
 
@@ -61,9 +59,7 @@ export abstract class AbstractCrudService<
 	 * @returns {Observable<TEntity extends IEntity>} which eventually will bring the data of the fetched instance or
 	 * raise an error if non is found.
 	 */
-	getInstance(
-		id: any
-	): Observable<TEntity | ApiSuccessResponse<TEntity> | ApiErrorResponse> {
+	getInstance(id: any): Observable<TEntity | ApiResponse<TEntity>> {
 		return this.http.get<TEntity>(this.getSpecificModelUrl(id), this.headers);
 	}
 
@@ -78,7 +74,7 @@ export abstract class AbstractCrudService<
 	 */
 	createItem(
 		data: TEntity | null = null
-	): Observable<TEntity | ApiSuccessResponse<TEntity> | ApiErrorResponse> {
+	): Observable<TEntity | ApiResponse<TEntity>> {
 		return super.post(this.getModelUrl(), data, false).pipe(
 			tap<TEntity>(entity => {
 				console.debug('Added: ', entity);
@@ -95,9 +91,7 @@ export abstract class AbstractCrudService<
 	 * (maybe the backend changes something when processing the request, through this Observable those changes are
 	 * available).
 	 */
-	updateItem(
-		item: TEntity
-	): Observable<TEntity | ApiSuccessResponse<TEntity> | ApiErrorResponse> {
+	updateItem(item: TEntity): Observable<TEntity | ApiResponse<TEntity>> {
 		const url = this.getSpecificModelUrl(item);
 
 		return super.put(url, item, false).pipe(

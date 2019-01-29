@@ -1,7 +1,51 @@
-<p>
-  communications-page works!
-</p>
+<div class="container-fluid">
 
-<pre>
+	<div class="row">
+
+		<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let commObj of commObjectives$ | async">
+			<comms-card>
+				<comms-card-header
+					[title]="commObj.name"
+					[subtitle]="formatCommObjectiveType(commObj.type)">
+					<div class="btn-group" role="group" aria-label="Basic example">
+						<button type="button" class="btn btn-xs btn-primary btn-fill">
+							<i class="ti-pencil"></i>
+						</button>
+						<button type="button" class="btn btn-xs btn-primary btn-fill">
+							<i class="ti-trash"></i>
+						</button>
+					</div>
+				</comms-card-header>
+				<comms-card-body>
+
+					<ul class="list-group" *ngIf="commObj.communication_ways.length > 0; else noItems">
+						<li *ngFor="let way of commObj.communication_ways" class="list-group-item">
+							<span class="badge">{{ way.contact_number || '---' }}</span>
+							{{ formatWayType(way.type) }}
+						</li>
+					</ul>
+					<ng-template #noItems>
+						<ul class="list-group">
+							<li class="list-group-item text-center">
+								No tiene vías de comunicación
+							</li>
+						</ul>
+					</ng-template>
+					
+					<comms-card-footer>						
+						<hr>
+						<div class="stats">
+							<i class="ti-reload"></i> Última actualización: {{ commObj.updated_at | date:'dd/MM/yyyy hh:mm aa' }}
+						</div>
+					</comms-card-footer>
+				</comms-card-body>
+			</comms-card>
+		</div>
+
+	</div>
+
+</div>
+
+<!-- <pre>
 	{{ commObjectives$ | async | json }}
-</pre>
+</pre> -->

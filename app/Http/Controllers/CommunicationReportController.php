@@ -16,27 +16,28 @@ class CommunicationReportController extends Controller
      */
     public function index()
     {
-			$data = CommunicationReport
+			$query = CommunicationReport
 								::select(
 									'communication_reports.*',
-									'communication_objectives.id as objective_id',
+									// 'communication_objectives.id as objective_id',
 									'communication_objectives.name as objective_name',
 									'communication_objectives.type as objective_type',
-									'communication_ways.id as way_id',
+									// 'communication_ways.id as way_id',
 									'communication_ways.type as way_type',
 									'communication_ways.contact_number'
 								)
-								->join(
+								->leftjoin(
 									'communication_objectives',
 									'communication_reports.communication_objective_id', '=', 'communication_objectives.id'
 								)
-								->join(
+								->leftjoin(
 									'communication_ways',
 									'communication_reports.communication_way_id', '=', 'communication_ways.id'
 								)
 								->get();
 
-			return $data->groupBy(['objective_name', 'date']);
+			$data = $query->groupBy(['communication_objective_id', 'date']);
+			return $this->successResponse($data);
 		}
 
 		public function latestReports()
@@ -44,18 +45,18 @@ class CommunicationReportController extends Controller
 			$query = CommunicationReport
 								::select(
 									'communication_reports.*',
-									'communication_objectives.id as objective_id',
+									// 'communication_objectives.id as objective_id',
 									'communication_objectives.name as objective_name',
 									'communication_objectives.type as objective_type',
-									'communication_ways.id as way_id',
+									// 'communication_ways.id as way_id',
 									'communication_ways.type as way_type',
 									'communication_ways.contact_number'
 								)
-								->join(
+								->leftjoin(
 									'communication_objectives',
 									'communication_reports.communication_objective_id', '=', 'communication_objectives.id'
 								)
-								->join(
+								->leftjoin(
 									'communication_ways',
 									'communication_reports.communication_way_id', '=', 'communication_ways.id'
 								);
@@ -65,10 +66,12 @@ class CommunicationReportController extends Controller
 				$query->whereIn('communication_objectives.type', $types);
 			}
 
-			return $query->get()
+			$data = $query->get()
 									->sortByDesc('date')
 									->groupBy(['date', 'objective_name'])
 									->first();
+
+			return $this->successResponse($data);
 		}
 
     /**

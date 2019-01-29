@@ -1,0 +1,23 @@
+<div class="card">
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="icon-big text-center {{ config.iconColor || 'icon-primary' }}">
+					<i [class]="config.icon"></i>
+				</div>
+			</div>
+			<div class="col-xs-7">
+				<div class="numbers">
+					<p>{{ config.title }}</p>
+					{{ config.mainText }}
+				</div>
+			</div>
+		</div>
+		<div class="footer" *ngIf="config.footer">
+			<hr />
+			<div class="stats">
+				<i [class]="config.footer.footerIcon"></i> {{ config.footer.footerText }}
+			</div>
+		</div>
+	</div>
+</div>

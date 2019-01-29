@@ -14,5 +14,7 @@ export interface CommunicationObjective extends BaseEntity {
 	name?: string;
 	type: CommunicationObjectiveTypes;
 
-	communicationWays: CommunicationWay[];
+	communication_ways: CommunicationWay[];
+	created_at: string;
+	updated_at: string;
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { APP_MENU } from './_navigation';
-
-declare var $: any;
+import { APP_MENU, MenuItem } from './_navigation';
 
 @Component({
 	moduleId: module.id,
@@ -9,17 +7,14 @@ declare var $: any;
 	templateUrl: 'sidebar.component.html'
 })
 export class SidebarComponent implements OnInit {
-	public menuItems: any[];
+	public menuItems: MenuItem[];
 
 	ngOnInit() {
 		this.menuItems = APP_MENU.filter(menuItem => menuItem);
+		console.log(this.menuItems);
 	}
 
 	get isNotMobileMenu() {
 		return window.innerWidth > 991 ? false : true;
-		// if($(window).width() > 991){
-		//     return false;
-		// }
-		// return true;
 	}
 }
