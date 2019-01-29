@@ -11,7 +11,6 @@ export class SidebarComponent implements OnInit {
 
 	ngOnInit() {
 		this.menuItems = APP_MENU.filter(menuItem => menuItem);
-		console.log(this.menuItems);
 	}
 
 	get isNotMobileMenu() {

@@ -3,7 +3,6 @@ import { CommunicationReportsService } from '../@core/services/communication-rep
 import { Observable } from 'rxjs';
 import {
 	CommunicationsReportSummary,
-	CommunicationReport,
 	CombinedReportSummaries
 } from '../@core/models';
 import { ApiResponse } from '../@shared/models';

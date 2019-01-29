@@ -25,6 +25,10 @@ const ROUTES: Routes = [
 					{
 						path: 'details/:id',
 						component: fromComponents.CommunicationReportDetailsComponent
+					},
+					{
+						path: 'create',
+						component: fromContainers.CommunicationReportComponent
 					}
 				]
 			}

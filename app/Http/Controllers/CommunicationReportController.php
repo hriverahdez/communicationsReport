@@ -19,10 +19,8 @@ class CommunicationReportController extends Controller
 			$query = CommunicationReport
 								::select(
 									'communication_reports.*',
-									// 'communication_objectives.id as objective_id',
 									'communication_objectives.name as objective_name',
 									'communication_objectives.type as objective_type',
-									// 'communication_ways.id as way_id',
 									'communication_ways.type as way_type',
 									'communication_ways.contact_number'
 								)
@@ -45,10 +43,8 @@ class CommunicationReportController extends Controller
 			$query = CommunicationReport
 								::select(
 									'communication_reports.*',
-									// 'communication_objectives.id as objective_id',
 									'communication_objectives.name as objective_name',
 									'communication_objectives.type as objective_type',
-									// 'communication_ways.id as way_id',
 									'communication_ways.type as way_type',
 									'communication_ways.contact_number'
 								)
@@ -68,7 +64,7 @@ class CommunicationReportController extends Controller
 
 			$data = $query->get()
 									->sortByDesc('date')
-									->groupBy(['date', 'objective_name'])
+									->groupBy(['date', 'communication_objective_id'])
 									->first();
 
 			return $this->successResponse($data);

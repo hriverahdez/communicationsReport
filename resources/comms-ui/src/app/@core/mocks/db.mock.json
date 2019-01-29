@@ -1,65 +1,68 @@
 {
 	"latest": {
-    "Benito Juarez": [
-        {
-            "id": 18,
-            "status": "GOOD",
-            "details": null,
-            "date": "2019-01-23",
-            "communication_objective_id": 2,
-            "communication_way_id": 5,
-            "created_at": "2019-01-20 19:03:48",
-            "updated_at": "2019-01-20 19:03:48",
-            "objective_name": "Benito Juarez",
-            "objective_type": "GEA",
-            "way_type": "CELLPHONE",
-            "contact_number": "52837158"
-        },
-        {
-            "id": 17,
-            "status": "GOOD",
-            "details": null,
-            "date": "2019-01-23",
-            "communication_objective_id": 2,
-            "communication_way_id": 4,
-            "created_at": "2019-01-20 19:03:48",
-            "updated_at": "2019-01-20 19:03:48",
-            "objective_name": "Benito Juarez",
-            "objective_type": "GEA",
-            "way_type": "TRUNKING",
-            "contact_number": "132-6547-987"
-        }
-    ],
-    "Bateria Sandino": [
-        {
-            "id": 15,
-            "status": "BAD",
-            "details": null,
-            "date": "2019-01-23",
-            "communication_objective_id": 1,
-            "communication_way_id": 2,
-            "created_at": "2019-01-20 19:03:48",
-            "updated_at": "2019-01-20 19:03:48",
-            "objective_name": "Bateria Sandino",
-            "objective_type": "BATTERY",
-            "way_type": "CELLPHONE",
-            "contact_number": "52837158"
-        },
-        {
-            "id": 16,
-            "status": "REGULAR",
-            "details": null,
-            "date": "2019-01-23",
-            "communication_objective_id": 1,
-            "communication_way_id": 3,
-            "created_at": "2019-01-20 19:03:48",
-            "updated_at": "2019-01-20 19:03:48",
-            "objective_name": "Bateria Sandino",
-            "objective_type": "BATTERY",
-            "way_type": "FM",
-            "contact_number": null
-        }
-    ]
+    "success": true,
+    "data": {
+        "1": [
+            {
+                "id": 15,
+                "status": "BAD",
+                "details": null,
+                "date": "2019-01-23",
+                "communication_objective_id": 1,
+                "communication_way_id": 2,
+                "created_at": "2019-01-20 19:03:48",
+                "updated_at": "2019-01-20 19:03:48",
+                "objective_name": "Bateria Sandino",
+                "objective_type": "BATTERY",
+                "way_type": "CELLPHONE",
+                "contact_number": "52837158"
+            },
+            {
+                "id": 16,
+                "status": "REGULAR",
+                "details": null,
+                "date": "2019-01-23",
+                "communication_objective_id": 1,
+                "communication_way_id": 3,
+                "created_at": "2019-01-20 19:03:48",
+                "updated_at": "2019-01-20 19:03:48",
+                "objective_name": "Bateria Sandino",
+                "objective_type": "BATTERY",
+                "way_type": "FM",
+                "contact_number": null
+            }
+        ],
+        "2": [
+            {
+                "id": 18,
+                "status": "GOOD",
+                "details": null,
+                "date": "2019-01-23",
+                "communication_objective_id": 2,
+                "communication_way_id": 5,
+                "created_at": "2019-01-20 19:03:48",
+                "updated_at": "2019-01-20 19:03:48",
+                "objective_name": "Benito Juarez",
+                "objective_type": "GEA",
+                "way_type": "CELLPHONE",
+                "contact_number": "52837158"
+            },
+            {
+                "id": 17,
+                "status": "GOOD",
+                "details": null,
+                "date": "2019-01-23",
+                "communication_objective_id": 2,
+                "communication_way_id": 4,
+                "created_at": "2019-01-20 19:03:48",
+                "updated_at": "2019-01-20 19:03:48",
+                "objective_name": "Benito Juarez",
+                "objective_type": "GEA",
+                "way_type": "TRUNKING",
+                "contact_number": "132-6547-987"
+            }
+        ]
+    }
 	},
 	"communication_objective": {
     "success": true,

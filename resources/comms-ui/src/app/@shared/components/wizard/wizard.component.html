@@ -1,0 +1,58 @@
+<comms-card>
+
+	<comms-card-body>
+		<comms-card-header
+			[title]="title">
+			
+			<button 
+				*ngIf="hasCancelButton"
+				(click)="cancel()"
+				class="btn btn-danger btn-xs btn-fill">
+				<i class="ti-close"></i>				
+			</button>
+
+		</comms-card-header>
+
+		<ng-container [ngTemplateOutlet]="selected.content"></ng-container>
+
+		<comms-card-footer>
+			<hr>
+			<div class="container-fluid" style="display: block !important">
+				<div class="row" style="display: block !important">
+					<div class="col-xs-6 text-left">
+						<button 
+							cdkStepperPrevious
+							*ngIf="!isFirstStep"							
+							class="btn btn-primary btn-sm btn-fill">
+							<i class="ti-angle-double-left"></i>
+							Anterior
+						</button>
+					</div>
+					<div class="col-xs-6 text-right">
+						<button 
+							*ngIf="!isLastStep"
+							cdkStepperNext							
+							[disabled]="!selected.completed"					
+							class="btn btn-primary btn-sm btn-fill">
+							Siguiente
+							<i class="ti-angle-double-right"></i>
+						</button>
+
+						<button 
+							*ngIf="isLastStep"
+							cdkStepperNext							
+							[disabled]="!selected.completed"
+							(click)="finish()"
+							class="btn btn-primary btn-sm btn-fill">
+							Finalizar
+							<i class="ti-angle-double-right"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</comms-card-footer>
+	</comms-card-body>
+
+
+</comms-card>

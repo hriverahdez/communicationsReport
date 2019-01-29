@@ -1,0 +1,26 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12">
+
+			<ng-container *ngIf="latestReports$ | async as latestReport">
+
+				<comms-wizard linear>
+					<cdk-step [completed]="completed">
+						PRUEBA 1
+						<button (click)="completed = true">COM</button>
+					</cdk-step>
+
+					<cdk-step [completed]="completed">
+						PRUEBA 2
+					</cdk-step>
+
+					<cdk-step [completed]="completed">
+						PRUEBA 3
+					</cdk-step>
+				</comms-wizard>
+
+			</ng-container>
+
+		</div>
+	</div>
+</div>

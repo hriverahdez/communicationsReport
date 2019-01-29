@@ -15,11 +15,11 @@ export interface CommunicationReport extends BaseEntity {
 	way_type: CommunicationWayTypes;
 	contact_number: string;
 	details: string;
-	date: 'string';
+	date: string;
 	communication_objective_id: string | number;
 	communication_way_id: string | number;
-	created_at: 'string';
-	updated_at: 'string';
+	created_at: string;
+	updated_at: string;
 }
 
 export interface CommunicationsReportSummary {
