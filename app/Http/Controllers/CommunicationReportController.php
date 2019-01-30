@@ -32,6 +32,7 @@ class CommunicationReportController extends Controller
 									'communication_ways',
 									'communication_reports.communication_way_id', '=', 'communication_ways.id'
 								)
+								->orderBy('communication_reports.date', 'DESC')
 								->get();
 
 			$data = $query->groupBy(['communication_objective_id', 'date']);
@@ -78,15 +79,15 @@ class CommunicationReportController extends Controller
      */
     public function store(Request $request)
     {
-			$objectives = $request->all();
+			$reports = $request->all();
 
 			try {
 
-				foreach ($objectives as $key => $communicationWayReports) {
-					foreach ($communicationWayReports as $report) {
+				// foreach ($objectives as $key => $communicationWayReports) {
+					foreach ($reports as $report) {
 						CommunicationReport::create($report);
 					}
-				}
+				// }
 
 				return $this->successResponse(
 					$this->latestReports()

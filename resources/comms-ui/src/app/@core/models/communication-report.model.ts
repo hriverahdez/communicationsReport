@@ -29,3 +29,11 @@ export interface CommunicationsReportSummary {
 export interface CombinedReportSummaries {
 	[key: string]: CommunicationsReportSummary;
 }
+
+export interface ReportSummaryData {
+	id: string;
+	name: string;
+	type: CommunicationObjectiveTypes;
+	date: string;
+	ways: CommunicationReport[];
+}

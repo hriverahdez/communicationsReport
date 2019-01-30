@@ -3,7 +3,8 @@ import { AbstractCrudService } from '../../@shared/asyncServices/http/abstract-c
 import {
 	CommunicationsReportSummary,
 	CommunicationReport,
-	CombinedReportSummaries
+	CombinedReportSummaries,
+	CommunicationObjectiveTypes
 } from '../models';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,11 +22,22 @@ export class CommunicationReportsService extends AbstractCrudService<
 		return 'communication_report';
 	}
 
+	createReport(reports: CommunicationReport[]) {
+		return this.post<CommunicationReport[]>(`${this.modelName}`, reports);
+	}
+
 	getAllReports() {
 		return this.get<CombinedReportSummaries>(`${this.modelName}`);
 	}
 
-	getLatestReports() {
-		return this.get<CommunicationsReportSummary>(`${this.modelName}/latest`);
+	getLatestReports(types?: CommunicationObjectiveTypes[]) {
+		let queryString = '';
+		if (types) {
+			queryString = '?types=' + types.join(',');
+		}
+
+		return this.get<CommunicationsReportSummary>(
+			`${this.modelName}/latest${queryString}`
+		);
 	}
 }

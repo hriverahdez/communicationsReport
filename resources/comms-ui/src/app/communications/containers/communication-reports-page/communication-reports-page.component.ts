@@ -17,6 +17,18 @@ export class CommunicationReportsPageComponent implements OnInit {
 		this.reports$ = this.sandbox.reports$;
 	}
 
+	canCreate(reports) {
+		return this.getIterableData(reports).some(r => {
+			const today = new Date();
+			return r.dates.some(d => {
+				const date = new Date(d);
+				return date === today;
+			});
+		});
+	}
+
+	createReport() {}
+
 	getIterableData(data: CombinedReportSummaries) {
 		const objectiveNameKeys = Object.keys(data);
 

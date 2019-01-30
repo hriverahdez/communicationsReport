@@ -5,6 +5,7 @@
 			[title]="title">
 			
 			<button 
+				type="button"
 				*ngIf="hasCancelButton"
 				(click)="cancel()"
 				class="btn btn-danger btn-xs btn-fill">
@@ -21,6 +22,7 @@
 				<div class="row" style="display: block !important">
 					<div class="col-xs-6 text-left">
 						<button 
+							type="button"
 							cdkStepperPrevious
 							*ngIf="!isFirstStep"							
 							class="btn btn-primary btn-sm btn-fill">
@@ -30,18 +32,20 @@
 					</div>
 					<div class="col-xs-6 text-right">
 						<button 
+							type="button"
 							*ngIf="!isLastStep"
 							cdkStepperNext							
-							[disabled]="!selected.completed"					
+							[disabled]="selected.hasError"
 							class="btn btn-primary btn-sm btn-fill">
 							Siguiente
 							<i class="ti-angle-double-right"></i>
 						</button>
 
 						<button 
+							type="button"
 							*ngIf="isLastStep"
 							cdkStepperNext							
-							[disabled]="!selected.completed"
+							[disabled]="!isValid"
 							(click)="finish()"
 							class="btn btn-primary btn-sm btn-fill">
 							Finalizar

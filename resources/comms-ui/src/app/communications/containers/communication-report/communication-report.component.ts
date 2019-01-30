@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {
 	CommunicationReport,
-	CommunicationsReportSummary
+	CommunicationsReportSummary,
+	ReportSummaryData
 } from '../../../@core/models';
 import { CommunicationReportSandbox } from '../../communication-report.sandbox';
 import { Observable } from 'rxjs';
@@ -12,22 +13,25 @@ import { Observable } from 'rxjs';
 	styleUrls: ['./communication-report.component.scss']
 })
 export class CommunicationReportComponent implements OnInit {
-	report: CommunicationReport;
-
-	completed = false
-
 	latestReports$: Observable<CommunicationsReportSummary>;
+
+	saving$: Observable<boolean>;
 
 	constructor(private sandbox: CommunicationReportSandbox) {}
 
 	ngOnInit() {
+		this.saving$ = this.sandbox.saving$;
+		this.sandbox.loadLatestReports();
 		this.latestReports$ = this.sandbox.latestReports$;
-		this.latestReports$.subscribe(vale =>
-			console.log('here::::', this.getIterableData(vale))
-		);
 	}
 
-	getIterableData(summary: CommunicationsReportSummary) {
+	createReport(reports: CommunicationReport[]) {
+		this.sandbox.createReport(reports);
+	}
+
+	getIterableSummaryData(
+		summary: CommunicationsReportSummary
+	): ReportSummaryData[] {
 		const objectiveIds = Object.keys(summary);
 
 		return objectiveIds.map(id => {

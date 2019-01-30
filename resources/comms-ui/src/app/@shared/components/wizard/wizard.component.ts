@@ -18,9 +18,7 @@ import { CdkStepper } from '@angular/cdk/stepper';
 })
 export class WizardComponent extends CdkStepper
 	implements OnInit, AfterContentInit {
-	ngAfterContentInit(): void {
-		console.log(this.steps.toArray());
-	}
+	ngAfterContentInit(): void {}
 	@Input() title: string;
 
 	@Input() canGoNext: boolean = true;
@@ -42,6 +40,10 @@ export class WizardComponent extends CdkStepper
 
 	get isLastStep() {
 		return this.selectedIndex === this.steps.toArray().length - 1;
+	}
+
+	get isValid() {
+		return this.selected.stepControl.valid;
 	}
 
 	onClick(number: number) {

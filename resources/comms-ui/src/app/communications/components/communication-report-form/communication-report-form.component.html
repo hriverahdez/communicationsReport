@@ -1,3 +1,24 @@
-<p>
-  communication-report-form works!
-</p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12">
+
+
+			<comms-wizard linear
+				(finished)="save(reportForm)">
+
+				<cdk-step *ngFor="let report of reportSummaryData; trackBy: trackByIndex"
+					[stepControl]="reportForm">
+					<comms-communication-report-form-control
+						[parentForm]="reportForm"
+						[reportData]="report"></comms-communication-report-form-control>
+				</cdk-step>
+
+			</comms-wizard>			
+
+		</div>
+	</div>
+</div>
+
+<pre>
+	{{ reportForm.value | json }}
+</pre>

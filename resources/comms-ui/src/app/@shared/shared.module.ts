@@ -7,7 +7,8 @@ import {
 	BsDropdownModule,
 	BsDatepickerModule,
 	defineLocale,
-	BsLocaleService
+	BsLocaleService,
+	TooltipModule
 } from 'ngx-bootstrap';
 
 import { esLocale } from 'ngx-bootstrap/locale';
@@ -17,7 +18,8 @@ const exportedModules = [
 	ReactiveFormsModule,
 	CdkStepperModule,
 	BsDropdownModule,
-	BsDatepickerModule
+	BsDatepickerModule,
+	TooltipModule
 ];
 
 // components
@@ -30,7 +32,8 @@ import * as fromComponents from './components';
 		ReactiveFormsModule,
 		...exportedModules,
 		BsDropdownModule.forRoot(),
-		BsDatepickerModule.forRoot()
+		BsDatepickerModule.forRoot(),
+		TooltipModule.forRoot()
 	],
 	exports: [...fromComponents.components, ...exportedModules]
 })
@@ -38,7 +41,7 @@ export class SharedModule {
 	/** Setting NGX-BOOTSTRAP's Locale to Spanish to
 	 *  display components such as datepicker in that language
 	 */
-	constructor(private localeService: BsLocaleService) {
-		this.localeService.use('es');
-	}
+	// constructor(private localeService: BsLocaleService) {
+	// 	this.localeService.use('es');
+	// }
 }

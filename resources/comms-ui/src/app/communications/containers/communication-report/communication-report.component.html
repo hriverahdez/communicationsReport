@@ -2,24 +2,20 @@
 	<div class="row">
 		<div class="col-xs-12">
 
-			<ng-container *ngIf="latestReports$ | async as latestReport">
+			<ng-container *ngIf="latestReports$ | async as latestReportSummary; else loading">
 
-				<comms-wizard linear>
-					<cdk-step [completed]="completed">
-						PRUEBA 1
-						<button (click)="completed = true">COM</button>
-					</cdk-step>
+				<comms-loader *ngIf="saving$ | async as saving"></comms-loader>
 
-					<cdk-step [completed]="completed">
-						PRUEBA 2
-					</cdk-step>
-
-					<cdk-step [completed]="completed">
-						PRUEBA 3
-					</cdk-step>
-				</comms-wizard>
+				<comms-communication-report-form					
+					*ngIf="!saving"
+					[reportSummaryData]="getIterableSummaryData(latestReportSummary)"
+					[latestReportSummary]="latestReportSummary"
+					(create)="createReport($event)"></comms-communication-report-form>
 
 			</ng-container>
+			<ng-template #loading>
+				<comms-loader></comms-loader>
+			</ng-template>
 
 		</div>
 	</div>

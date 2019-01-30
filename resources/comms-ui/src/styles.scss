@@ -1,1 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+
+.loader-container-small {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group-append, .input-group-prepend {
+  display: flex;
+}
+
+.input-group-prepend {
+  margin-right: -1px;
+}
+
+.input-group>.input-group-prepend>.input-group-text {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: .375rem 1.35rem;
+  margin-bottom: 0;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #7A9E9F;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+.input-group>.form-control {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  margin-bottom: 0;
+}
+
+.input-group>.form-control:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
