@@ -31,17 +31,22 @@ class CommunicationReportsTableSeeder extends Seeder
 				[
 					'status' => 'BAD',
 					'communication_objective_id' => 2,
-					'communication_way_id' => 1
+					'communication_way_id' => 4
 				],
 				[
 					'status' => 'GOOD',
 					'communication_objective_id' => 2,
-					'communication_way_id' => 2
+					'communication_way_id' => 5
 				],
 				[
 					'status' => 'GOOD',
 					'communication_objective_id' => 2,
-					'communication_way_id' => 3
+					'communication_way_id' => 6
+				],
+				[
+					'status' => 'GOOD',
+					'communication_objective_id' => 2,
+					'communication_way_id' => 7
 				],
 			];
 

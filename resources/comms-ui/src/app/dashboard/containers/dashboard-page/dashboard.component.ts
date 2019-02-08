@@ -4,6 +4,9 @@ import {
 	InfoPanelConfig,
 	InfoPanelIconColors
 } from '../../components/info-panel/info-panel-config';
+import { Observable } from 'rxjs';
+import { CommunicationObjectiveGroupsAvailabilityTotals } from '../../../@core/models/stats.model';
+import { DashboardSandbox } from '../../dashboard.sandbox';
 
 declare var $: any;
 
@@ -13,121 +16,130 @@ declare var $: any;
 	templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
+	groupTotals$: Observable<CommunicationObjectiveGroupsAvailabilityTotals>;
+
 	panels: InfoPanelConfig[] = [
 		{
+			key: 'GENERATION',
 			iconColor: InfoPanelIconColors.warning,
-			icon: 'ti-server',
-			mainText: '105GB',
-			title: 'Capacity',
-			footer: {
-				footerIcon: 'ti-reload',
-				footerText: 'Updated now'
-			}
-		},
-		{
-			iconColor: InfoPanelIconColors.success,
-			icon: 'ti-wallet',
-			mainText: '$1,345',
-			title: 'Revenue',
+			icon: 'ti-plug',
+			mainText: '---',
+			title: 'Generación',
 			footer: {
 				footerIcon: 'ti-calendar',
-				footerText: 'Last day'
+				footerText: 'Fecha: ---'
 			}
 		},
 		{
+			key: 'DISTRIBUTIONS',
+			iconColor: InfoPanelIconColors.success,
+			icon: 'ti-car',
+			mainText: '---',
+			title: 'Distribuciones',
+			footer: {
+				footerIcon: 'ti-calendar',
+				footerText: 'Fecha: ---'
+			}
+		},
+		{
+			key: 'SUB_STATIONS',
 			iconColor: InfoPanelIconColors.danger,
 			icon: 'ti-pulse',
-			mainText: '23',
-			title: 'Errors',
+			mainText: '---',
+			title: 'Sub estaciones',
 			footer: {
-				footerIcon: 'ti-timer',
-				footerText: 'In the last hour'
+				footerIcon: 'ti-calendar',
+				footerText: 'Fecha: ---'
 			}
 		},
 		{
+			key: 'RENEWABLE_ENERGY',
 			iconColor: InfoPanelIconColors.info,
-			icon: 'ti-twitter-alt',
-			mainText: '+45',
-			title: 'Followers',
+			icon: 'ti-shine',
+			mainText: '---',
+			title: 'PSFV',
 			footer: {
-				footerIcon: 'ti-reload',
-				footerText: 'Updated now'
+				footerIcon: 'ti-calendar',
+				footerText: 'Fecha: ---'
 			}
 		}
 	];
 
+	constructor(private sandbox: DashboardSandbox) {}
+
 	ngOnInit() {
-		var dataSales = {
+		this.groupTotals$ = this.sandbox.groupAvailabilityTotals$;
+		const sub$ = this.groupTotals$.subscribe(data => {
+			console.log('data:::>', data);
+			this.panels = this.panels.map(panel => {
+				const footerText = `Último reporte: ${data.date}`;
+				const mainText = `${data.summary[panel.key].percentage} %`;
+				const { footer } = panel;
+
+				sub$.unsubscribe();
+				return { ...panel, mainText, footer: { ...footer, footerText } };
+			});
+		});
+
+		//////////////
+
+		//////////////
+
+		// var dataPreferences = {
+		// 	series: [[25, 30, 20, 25]]
+		// };
+
+		// var optionsPreferences = {
+		// 	donut: true,
+		// 	donutWidth: 40,
+		// 	startAngle: 0,
+		// 	total: 100,
+		// 	showLabel: false,
+		// 	axisX: {
+		// 		showGrid: false
+		// 	}
+		// };
+
+		// new Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+
+		// new Chartist.Pie('#chartPreferences', {
+		// 	labels: ['62%', '32%', '6%'],
+		// 	series: [62, 32, 6]
+		// });
+		this.buildDailyStatsChart();
+		// this.buildMonthlyBehaviourChart();
+	}
+
+	buildMonthlyBehaviourChart() {
+		const data = {
 			labels: [
-				'9:00AM',
-				'12:00AM',
-				'3:00PM',
-				'6:00PM',
-				'9:00PM',
-				'12:00PM',
-				'3:00AM',
-				'6:00AM'
-			],
-			series: [
-				[287, 385, 490, 562, 594, 626, 698, 895, 952],
-				[67, 152, 193, 240, 387, 435, 535, 642, 744],
-				[23, 113, 67, 108, 190, 239, 307, 410, 410]
-			]
-		};
-
-		var optionsSales = {
-			low: 0,
-			high: 1000,
-			showArea: true,
-			height: '245px',
-			axisX: {
-				showGrid: false
-			},
-			lineSmooth: Chartist.Interpolation.simple({
-				divisor: 3
-			}),
-			showLine: true,
-			showPoint: false
-		};
-
-		var responsiveSales: any[] = [
-			[
-				'screen and (max-width: 640px)',
-				{
-					axisX: {
-						labelInterpolationFnc: function(value) {
-							return value[0];
-						}
-					}
-				}
-			]
-		];
-
-		new Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
-
-		var data = {
-			labels: [
-				'Jan',
+				'Ene',
 				'Feb',
 				'Mar',
-				'Apr',
-				'Mai',
+				'Abr',
+				'May',
 				'Jun',
 				'Jul',
-				'Aug',
+				'Ago',
 				'Sep',
 				'Oct',
 				'Nov',
-				'Dec'
+				'Dic'
 			],
 			series: [
+				[542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
+				[542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
+				[542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
 				[542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
 				[230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]
 			]
 		};
 
-		var options = {
-			seriesBarDistance: 10,
+		var options: Chartist.ILineChartOptions = {
+			// seriesBarDistance: 10,
+			plugins: Chartist.plugins.legend({
+				className: 'crazyPink'
+			}),
 			axisX: {
 				showGrid: false
 			},
@@ -149,27 +161,175 @@ export class DashboardComponent implements OnInit {
 		];
 
 		new Chartist.Line('#chartActivity', data, options, responsiveOptions);
+	}
 
-		var dataPreferences = {
-			series: [[25, 30, 20, 25]]
-		};
-
-		var optionsPreferences = {
-			donut: true,
-			donutWidth: 40,
-			startAngle: 0,
-			total: 100,
-			showLabel: false,
-			axisX: {
-				showGrid: false
+	buildDailyStatsChart() {
+		const dailyStatsData = {
+			GENERATION: {
+				TRUNKING: {
+					total: 2,
+					available: 1,
+					percentage: 50
+				},
+				FM: {
+					total: 1,
+					available: 0,
+					percentage: 0
+				},
+				INTERNAL_PHONE: {
+					total: 1,
+					available: 1,
+					percentage: 100
+				},
+				EXTERNAL_PHONE: {
+					total: 1,
+					available: 1,
+					percentage: 100
+				},
+				CELLPHONE: {
+					total: 2,
+					available: 1,
+					percentage: 50
+				}
+			},
+			SUB_STATIONS: {
+				TRUNKING: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				FM: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				INTERNAL_PHONE: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				EXTERNAL_PHONE: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				CELLPHONE: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				}
+			},
+			DISTRIBUTIONS: {
+				TRUNKING: {
+					total: 1,
+					available: 0,
+					percentage: 0
+				},
+				FM: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				INTERNAL_PHONE: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				EXTERNAL_PHONE: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				CELLPHONE: {
+					total: 2,
+					available: 1,
+					percentage: 0
+				}
+			},
+			RENEWABLE_ENERGY: {
+				TRUNKING: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				FM: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				INTERNAL_PHONE: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				EXTERNAL_PHONE: {
+					total: 0,
+					available: 0,
+					percentage: 0
+				},
+				CELLPHONE: {
+					total: 2,
+					available: 1,
+					percentage: 0
+				}
 			}
 		};
 
-		new Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+		let labels = [];
+		const groups = Object.keys(dailyStatsData);
+		const transformedData = groups.reduce((acc, groupKey) => {
+			labels = Object.keys(dailyStatsData[groupKey]);
+			labels.forEach(lk => {
+				const { total: currTotal, available: currAvail } = dailyStatsData[
+					groupKey
+				][lk];
+				if (acc[lk]) {
+					const { total, available } = acc[lk];
+					acc[lk].total = total + currTotal;
+					acc[lk].available = available + currAvail;
+				} else {
+					acc[lk] = {
+						total: currTotal,
+						available: currAvail
+					};
+				}
+			});
+			return acc;
+		}, []);
 
-		new Chartist.Pie('#chartPreferences', {
-			labels: ['62%', '32%', '6%'],
-			series: [62, 32, 6]
+		console.log('series;::', transformedData);
+
+		const totals = Object.keys(transformedData).map(k => {
+			return transformedData[k].total;
 		});
+
+		const avails = Object.keys(transformedData).map(k => {
+			return transformedData[k].available;
+		});
+
+		const data: Chartist.IChartistData = {
+			labels,
+			series: [totals, avails]
+		};
+
+		const options: Chartist.IBarChartOptions = {
+			seriesBarDistance: 10
+		};
+
+		var responsiveOptions = [
+			[
+				'screen and (max-width: 640px)',
+				{
+					seriesBarDistance: 5,
+					axisX: {
+						labelInterpolationFnc: function(value) {
+							return value[0];
+						}
+					}
+				}
+			]
+		];
+
+		new Chartist.Bar('#dailyStats', data, options);
 	}
 }

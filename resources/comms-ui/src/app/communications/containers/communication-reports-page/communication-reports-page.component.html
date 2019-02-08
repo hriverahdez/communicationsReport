@@ -5,14 +5,14 @@
 			<comms-card padding="7">
 				<div class="col-xs-2">
 					<a routerLink="/comms/reports/create"
-						*ngIf="canCreate(allReports)"
+						*ngIf="!hasCreatedReportForToday(allReports)"
 						class="btn btn-primary btn-fill">
 						<i class="ti-write"></i>
 						Realizar reporte
 					</a>
 
 					<button 
-						*ngIf="!canCreate(allReports)"
+						*ngIf="hasCreatedReportForToday(allReports)"
 						type="button"
 						tooltip="Ya creo un reporte para el día de hoy. No puede crear otro"
 						class="btn btn-primary btn-fill">

@@ -6,6 +6,7 @@ export enum InfoPanelIconColors {
 }
 
 export interface InfoPanelConfig {
+	key?: string;
 	iconColor: InfoPanelIconColors;
 	icon: string;
 	mainText: string;
@@ -13,5 +14,5 @@ export interface InfoPanelConfig {
 	footer?: {
 		footerIcon: string;
 		footerText: string;
-	}
+	};
 }

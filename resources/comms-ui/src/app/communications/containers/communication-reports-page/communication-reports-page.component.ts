@@ -17,14 +17,26 @@ export class CommunicationReportsPageComponent implements OnInit {
 		this.reports$ = this.sandbox.reports$;
 	}
 
-	canCreate(reports) {
+	hasCreatedReportForToday(reports) {
+		const today = this.removeTime(new Date());
+
+		console.log('today', today.getTime());
 		return this.getIterableData(reports).some(r => {
-			const today = new Date();
 			return r.dates.some(d => {
-				const date = new Date(d);
-				return date === today;
+				const date = this.removeTime(new Date(d));
+				console.log('date', date.getTime());
+				return date.getTime() === today.getTime();
 			});
 		});
+	}
+
+	removeTime(date: Date) {
+		const newDate = new Date(date);
+		newDate.setHours(0);
+		newDate.setMinutes(0);
+		newDate.setSeconds(0);
+		newDate.setMilliseconds(0);
+		return newDate;
 	}
 
 	createReport() {}

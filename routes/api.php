@@ -26,6 +26,11 @@ Route::prefix('v1')->group(function () {
 			Route::get('latest', 'CommunicationReportController@latestReports');
 		});
 
+		Route::prefix('stats')->group(function () {
+			Route::get('daily', 'StatsController@getDailyStats');
+			Route::get('groupTotals', 'StatsController@getGroupsTotalAvailability');
+		});
+
 		Route::resource('communication_report', 'CommunicationReportController');
 
 });

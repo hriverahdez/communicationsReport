@@ -6,6 +6,11 @@ use App\CommunicationReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Carbon;
+use App\CommunicationObjective;
+use App\CommunicationWay;
+use App\Services\StatsService;
+use App\Enums;
 
 class CommunicationReportController extends Controller
 {
@@ -130,5 +135,7 @@ class CommunicationReportController extends Controller
     public function destroy(CommunicationReport $communicationReport)
     {
         //
-    }
+		}
+
+
 }
