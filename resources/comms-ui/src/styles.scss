@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+.bs-datepicker-head {
+  background-color: #7A9E9F !important;
+}
+
+.theme-green .bs-datepicker-body table td span.selected, .theme-green .bs-datepicker-body table td.selected span, .theme-green .bs-datepicker-body table td span[class*="select-"]:after, .theme-green .bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: #7A9E9F;
+}
+
 .loader-container-small {
   position: relative;
   width: 100%;

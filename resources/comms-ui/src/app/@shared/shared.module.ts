@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 
 import {
@@ -15,6 +15,7 @@ import { esLocale } from 'ngx-bootstrap/locale';
 defineLocale('es', esLocale);
 
 const exportedModules = [
+	FormsModule,
 	ReactiveFormsModule,
 	CdkStepperModule,
 	BsDropdownModule,

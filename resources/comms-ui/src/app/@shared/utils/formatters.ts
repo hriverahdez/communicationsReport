@@ -19,5 +19,15 @@ export const formatWayType = (type: string) => {
 		CELLPHONE: 'Celular'
 	};
 
-	return dictionary[type];
+	return dictionary[type] || '---';
+};
+
+export const formatReportStatus = status => {
+	const statuses = {
+		GOOD: 'Bien',
+		REGULAR: 'Regular',
+		BAD: 'Mal'
+	};
+
+	return statuses[status] || '---';
 };

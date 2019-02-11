@@ -11,7 +11,7 @@ export const APP_MENU: MenuItem[] = [
 	{
 		path: 'comms',
 		title: 'Objetivos',
-		icon: 'ti-view-list-alt',
+		icon: 'ti-signal',
 		class: '',
 		exactRoute: true
 	},
@@ -20,12 +20,10 @@ export const APP_MENU: MenuItem[] = [
 		title: 'Reportes',
 		icon: 'ti-archive',
 		class: ''
-		// exactRoute: true
 	},
 	{ path: 'user', title: 'User Profile', icon: 'ti-user', class: '' },
 	{ path: 'typography', title: 'Typography', icon: 'ti-text', class: '' },
 	{ path: 'icons', title: 'Icons', icon: 'ti-pencil-alt2', class: '' },
-	{ path: 'maps', title: 'Maps', icon: 'ti-map', class: '' },
 	{ path: 'notifications', title: 'Notifications', icon: 'ti-bell', class: '' },
 	{
 		path: 'upgrade',

@@ -1,3 +1,70 @@
-<p>
-  communication-report-details works!
-</p>
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="col-xs-4">
+
+			<label for="exampleFormControlSelect1">Tipo de objetivo:</label>
+			<select class="form-control border-input"
+				name="searchType"
+				[(ngModel)]="searchType">
+				
+				<option value="">Cualquiera</option>
+				<option value="BATTERY">Batería</option>
+				<option value="FUEL">Fuel</option>
+				<option value="GEA">GEA</option>
+				<option value="DISTRIBUTION">Posición de distribución</option>
+				<option value="SOLAR_PARK">Parque solar fotovoltaico</option>
+				<option value="SUB_STATION">Sub-estación</option>				
+			</select>
+
+		</div>
+		<div class="col-xs-8">
+	
+			<label for="exampleFormControlSelect1">Criterio de busqueda:</label>
+			<input type="text" 
+				class="form-control border-input" 
+				placeholder="Buscar..."
+				(keyup)="searchNotifier$.next($event.target.value)">
+				
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row">
+		<div class="col-sm-6 col-md-4" *ngFor="let objective of objectives">
+
+			<comms-card>
+				<comms-card-header
+					[title]="objective[0]?.objective_name">
+					<span class="badge">
+						{{ formatCommObjectiveType(objective[0]?.objective_type) }}
+					</span>
+				</comms-card-header>
+				<comms-card-body>
+
+					<ul class="list-group">
+						<li 
+							*ngFor="let report of objective"								
+							class="list-group-item list-group-item-action">
+							<div>
+								<strong>{{ formatWayType(report.way_type) }}: </strong> 
+								<span class="label pull-right" 
+									[ngClass]="getStatusBadgesClassMap(report)">
+									{{ formatReportStatus(report.status) }}
+								</span>
+								<div class="clearfix"></div>
+							</div>
+							<p class="category">
+								{{ report.details || '---' }}
+							</p>
+
+						</li>						
+					</ul>
+					
+				</comms-card-body>
+			</comms-card>
+
+		</div>
+	</div>
+</div>

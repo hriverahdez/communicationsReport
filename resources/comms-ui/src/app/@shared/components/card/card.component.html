@@ -1,9 +1,5 @@
 <div class="card" [ngStyle]="{ 'padding.px': padding || 'inherit' }">
 	<ng-content></ng-content>
-	<div class="header">
-		<ng-content select="comms-card-header"></ng-content>
-	</div>
-	<div class="content">
-		<ng-content select="comms-card-body"></ng-content>
-	</div>	
+	<ng-content select="comms-card-header"></ng-content>
+	<ng-content select="comms-card-body"></ng-content>
 </div>

@@ -4,9 +4,11 @@ import { Component, OnInit } from '@angular/core';
 	selector: 'comms-card-body',
 	template: `
 		<ng-container>
-			<ng-content></ng-content>
-			<div class="footer">
-				<ng-content select="comms-card-footer"></ng-content>
+			<div class="content">
+				<ng-content></ng-content>
+				<div class="footer">
+					<ng-content select="comms-card-footer"></ng-content>
+				</div>
 			</div>
 		</ng-container>
 	`,

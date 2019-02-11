@@ -1,0 +1,10 @@
+<ng-container>
+	<div class="header" [ngStyle]="{ 'padding.px': padding || 'inherit' }">
+		<div class="pull-left">
+			<h4 class="title">{{ title }}</h4>
+			<p class="category">{{ subtitle }}</p>
+		</div>
+		<div class="pull-right"><ng-content></ng-content></div>
+		<div class="clearfix"></div>
+	</div>
+</ng-container>

@@ -1,6 +1,26 @@
 <div class="container-fluid">
 
 	<div class="row">
+		<div class="col-xs-12">
+			<comms-card padding="7">
+				<div class="row">
+					<div class="col-xs-4">
+						<button (click)="createCommObjective()"
+							class="btn btn-primary btn-fill">
+							<i class="ti-plus"></i>
+							Agregar Objetivo de Comunicación
+						</button>
+					</div>
+	
+					<div class="col-xs-8">
+						<input type="text" class="form-control border-input" placeholder="Buscar...">					
+					</div>
+				</div>
+			</comms-card>
+		</div>
+	</div>
+
+	<div class="row">
 
 		<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let commObj of commObjectives$ | async">
 			<comms-card>

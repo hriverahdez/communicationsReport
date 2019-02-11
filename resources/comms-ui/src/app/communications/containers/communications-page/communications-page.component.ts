@@ -23,4 +23,8 @@ export class CommunicationsPageComponent implements OnInit {
 		this.sandbox.loadCommunicationObjectives();
 		this.commObjectives$ = this.sandbox.commObjectives$;
 	}
+
+	createCommObjective() {
+		window.alert('INOCENTE!! Esto le toca a Pipito hacerlo');
+	}
 }

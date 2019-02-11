@@ -40,7 +40,7 @@ class CommunicationReportController extends Controller
 								->orderBy('communication_reports.date', 'DESC')
 								->get();
 
-			$data = $query->groupBy(['communication_objective_id', 'date']);
+			$data = $query->groupBy(['date', 'communication_objective_id']);
 			return $this->successResponse($data);
 		}
 

@@ -11,6 +11,9 @@ import { CombinedReportSummaries } from '../../../@core/models';
 export class CommunicationReportsPageComponent implements OnInit {
 	reports$: Observable<CombinedReportSummaries>;
 
+	detailsShown: boolean = false;
+	selectedReport = null;
+
 	constructor(private sandbox: CommunicationReportSandbox) {}
 
 	ngOnInit() {
@@ -20,14 +23,12 @@ export class CommunicationReportsPageComponent implements OnInit {
 	hasCreatedReportForToday(reports) {
 		const today = this.removeTime(new Date());
 
-		console.log('today', today.getTime());
-		return this.getIterableData(reports).some(r => {
-			return r.dates.some(d => {
-				const date = this.removeTime(new Date(d));
-				console.log('date', date.getTime());
-				return date.getTime() === today.getTime();
-			});
-		});
+		// return this.getIterableData(reports).some(r => {
+		// 	return r.dates.some(d => {
+		// 		const date = this.removeTime(new Date(d));
+		// 		return date.getTime() === today.getTime();
+		// 	});
+		// });
 	}
 
 	removeTime(date: Date) {
@@ -42,20 +43,18 @@ export class CommunicationReportsPageComponent implements OnInit {
 	createReport() {}
 
 	getIterableData(data: CombinedReportSummaries) {
-		const objectiveNameKeys = Object.keys(data);
+		const reportDates = Object.keys(data);
 
-		return objectiveNameKeys.map(key => {
-			const reportDateKeys = Object.keys(data[key]);
+		return reportDates.map(date => ({ date, reports: data[date] }));
+	}
 
-			const firstDateKey = reportDateKeys[0];
-			const reports = data[key][firstDateKey];
-			const firstReport = reports[0];
+	showDetails(selectedReport) {
+		this.detailsShown = true;
+		this.selectedReport = selectedReport;
+	}
 
-			return {
-				id: key,
-				name: firstReport.objective_name,
-				dates: reportDateKeys
-			};
-		});
+	hideDetails() {
+		this.detailsShown = false;
+		this.selectedReport = null;
 	}
 }
