@@ -29,7 +29,6 @@ export class CommunicationReportFormControlComponent implements OnInit {
 		const arr = this.parentForm.get('allReports') as FormArray;
 		arr.push(this.childForm);
 		this.patchForm();
-		console.log(this.reportData);
 	}
 
 	formatCommObjectiveType(type: string) {

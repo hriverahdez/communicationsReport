@@ -1,4 +1,5 @@
-<div class="container-fluid" *ngIf="reports$ | async as allReports; else loading">
+<comms-loader *ngIf="loading"></comms-loader>
+<div class="container-fluid" *ngIf="!loading">
 
 	<div class="row">
 		<div class="col-xs-12">
@@ -12,8 +13,33 @@
 						</a>
 					</div>
 	
-					<div class="col-xs-10">
-						<input type="text" class="form-control border-input" placeholder="Buscar...">					
+					<div class="col-xs-10" *ngIf="!detailsShown">
+						<div class="row">
+							<div class="col-xs-6 col-xs-offset-6">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<i class="ti-calendar"></i>
+										</div>
+									</div>
+									<input 
+										type="text"
+										class="form-control border-input"
+										id="inlineFormInputGroup" placeholder="Buscar por fecha..."
+										name="date"								
+										bsDatepicker 
+										[bsConfig]="bsDatepickerConfig"
+										[(ngModel)]="searchDate"
+										(ngModelChange)="search($event)">
+									<div class="input-group-append cur-pointer" 
+										(click)="search(null)">
+										<div class="input-group-text">
+											<i class="ti-close"></i>
+										</div>
+									</div>
+								</div>	
+							</div>							
+						</div>
 					</div>
 				</div>
 			</comms-card>
@@ -30,12 +56,15 @@
 
 					<ul class="list-group">
 						<button 
-							*ngFor="let report of getIterableData(allReports)"								
+							*ngFor="let report of filteredData"								
 							class="list-group-item list-group-item-action"
 							(click)="showDetails(report)">
 							<i class="ti-clipboard"></i>
 							Reporte del: <strong>{{ report.date | date:'dd/MM/yyyy' }}</strong>
-						</button>						
+						</button>
+						<li *ngIf="filteredData.length === 0" class="list-group-item text-center">
+							No hay datos para mostrar
+						</li>
 					</ul>
 					
 				</comms-card-body>
@@ -64,6 +93,3 @@
 		</div>
 	</div>
 </div>
-<ng-template #loading>
-	<comms-loader></comms-loader>
-</ng-template>

@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommunicationReportSandbox } from '../../communication-report.sandbox';
 import { Observable } from 'rxjs';
-import { CombinedReportSummaries } from '../../../@core/models';
+import {
+	CombinedReportSummaries,
+	CommunicationsReportSummary
+} from '../../../@core/models';
+import { defaultBsDatepickerConfig } from '../../../@shared/utils/configs';
+import { removeTimeFromDate, parseDate } from '../../../@shared/utils/helpers';
 
 @Component({
 	selector: 'comms-communication-reports-page',
@@ -9,38 +14,41 @@ import { CombinedReportSummaries } from '../../../@core/models';
 	styleUrls: ['./communication-reports-page.component.scss']
 })
 export class CommunicationReportsPageComponent implements OnInit {
+	bsDatepickerConfig = defaultBsDatepickerConfig;
 	reports$: Observable<CombinedReportSummaries>;
 
 	detailsShown: boolean = false;
 	selectedReport = null;
+	loading: boolean = false;
+
+	originalData: CombinedReportSummaries;
+
+	searchDate: Date = null;
+
+	filteredData: {
+		date: string;
+		reports: CommunicationsReportSummary;
+	}[] = [];
 
 	constructor(private sandbox: CommunicationReportSandbox) {}
 
 	ngOnInit() {
+		this.loadData();
+	}
+
+	private loadData() {
+		this.loading = true;
 		this.reports$ = this.sandbox.reports$;
+		this.reports$.subscribe(data => {
+			this.loading = false;
+			this.originalData = data;
+			this.filteredData = this.getIterableData(data);
+		});
 	}
 
 	hasCreatedReportForToday(reports) {
-		const today = this.removeTime(new Date());
-
-		// return this.getIterableData(reports).some(r => {
-		// 	return r.dates.some(d => {
-		// 		const date = this.removeTime(new Date(d));
-		// 		return date.getTime() === today.getTime();
-		// 	});
-		// });
+		// TODO: MAYBE ADD VALIDATION TO PREVENT DOUBLE REPORT CREATION
 	}
-
-	removeTime(date: Date) {
-		const newDate = new Date(date);
-		newDate.setHours(0);
-		newDate.setMinutes(0);
-		newDate.setSeconds(0);
-		newDate.setMilliseconds(0);
-		return newDate;
-	}
-
-	createReport() {}
 
 	getIterableData(data: CombinedReportSummaries) {
 		const reportDates = Object.keys(data);
@@ -56,5 +64,20 @@ export class CommunicationReportsPageComponent implements OnInit {
 	hideDetails() {
 		this.detailsShown = false;
 		this.selectedReport = null;
+	}
+
+	search(date: Date) {
+		if (date) {
+			const dateWithoutTime = removeTimeFromDate(date);
+			const data = this.getIterableData(this.originalData);
+			this.filteredData = data.filter(rep => {
+				const reportDate = removeTimeFromDate(parseDate(rep.date));
+
+				return reportDate.getTime() === dateWithoutTime.getTime();
+			});
+		} else {
+			this.searchDate = null;
+			this.filteredData = this.getIterableData(this.originalData);
+		}
 	}
 }
