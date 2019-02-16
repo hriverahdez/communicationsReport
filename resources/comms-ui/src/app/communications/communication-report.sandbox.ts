@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+
+import { Store, select } from '@ngrx/store';
+import * as fromStore from './store';
+
 import { CommunicationReportsService } from '../@core/services/communication-reports.service';
 import { Observable, Subject } from 'rxjs';
 import {
@@ -6,6 +10,7 @@ import {
 	CombinedReportSummaries,
 	CommunicationReport
 } from '../@core/models';
+
 import { ApiResponse } from '../@shared/models';
 import { map, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -20,16 +25,29 @@ export class CommunicationReportSandbox {
 
 	latestReports$: Observable<CommunicationsReportSummary>;
 
-	reports$: Observable<
-		CombinedReportSummaries
-	> = this.communicationReportsService
-		.getAllReports()
-		.pipe(map((res: ApiResponse<CombinedReportSummaries>) => res.data));
+	// reports$: Observable<
+	// 	CombinedReportSummaries
+	// > = this.communicationReportsService
+	// 	.getAllReports()
+	// 	.pipe(map((res: ApiResponse<CombinedReportSummaries>) => res.data));
+
+	loading$: Observable<boolean> = this.store$.pipe(
+		select(fromStore.selectReportsLoading)
+	);
+
+	reports$: Observable<CombinedReportSummaries> = this.store$.pipe(
+		select(fromStore.selectReportsSummaries)
+	);
 
 	constructor(
 		private communicationReportsService: CommunicationReportsService,
+		private store$: Store<fromStore.CommunicationsFeatureState>,
 		private router: Router
 	) {}
+
+	loadAllReports() {
+		this.store$.dispatch(new fromStore.LoadCommunicationReports());
+	}
 
 	loadLatestReports() {
 		this._loading.next(true);

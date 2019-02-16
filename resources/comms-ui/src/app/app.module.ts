@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CdkStepperModule } from '@angular/cdk/stepper'
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -31,8 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
 		BrowserModule,
 		RouterModule.forRoot(AppRoutes),
 		HttpClientModule,
-		
-		CoreModule,
+
+		CoreModule.forRoot(),
 		DashboardModule,
 		CommunicationsModule
 	],

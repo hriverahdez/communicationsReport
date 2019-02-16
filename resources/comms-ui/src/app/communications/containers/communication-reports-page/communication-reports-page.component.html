@@ -1,5 +1,5 @@
-<comms-loader *ngIf="loading"></comms-loader>
-<div class="container-fluid" *ngIf="!loading">
+<comms-loader *ngIf="loading$ | async"></comms-loader>
+<div class="container-fluid" *ngIf="!(loading$ | async)">
 
 	<div class="row">
 		<div class="col-xs-12">

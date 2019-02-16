@@ -19,7 +19,7 @@ export class CommunicationReportsPageComponent implements OnInit {
 
 	detailsShown: boolean = false;
 	selectedReport = null;
-	loading: boolean = false;
+	loading$: Observable<boolean>;
 
 	originalData: CombinedReportSummaries;
 
@@ -33,16 +33,18 @@ export class CommunicationReportsPageComponent implements OnInit {
 	constructor(private sandbox: CommunicationReportSandbox) {}
 
 	ngOnInit() {
-		this.loadData();
+		this.register();
+		this.sandbox.loadAllReports();
 	}
 
-	private loadData() {
-		this.loading = true;
+	private register() {
+		this.loading$ = this.sandbox.loading$;
 		this.reports$ = this.sandbox.reports$;
 		this.reports$.subscribe(data => {
-			this.loading = false;
-			this.originalData = data;
-			this.filteredData = this.getIterableData(data);
+			if (data) {
+				this.originalData = data;
+				this.filteredData = this.getIterableData(data);
+			}
 		});
 	}
 
