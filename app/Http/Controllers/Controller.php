@@ -24,13 +24,17 @@ class Controller extends BaseController
 			], 404);
 		}
 
-		public function errorResponse(\Exception $e = null) {
-			$errorContent = env('APP_ENV') == 'dev' ?
-				$e :
-				'There was an error in the server';
+		public function errorResponse($message = null, $status = 500, \Exception $e = null) {
+
+			if ( env('APP_ENV') == 'dev' && !is_null( $e ) ) {
+				$errorContent = $e;
+			}
+			else {
+				$errorContent = is_null( $message ) ? 'There was an error in the server' : $message;
+			}
 
 			return response()->json([
 				'error' => $errorContent
-			], 404);
+			], $status);
 		}
 }

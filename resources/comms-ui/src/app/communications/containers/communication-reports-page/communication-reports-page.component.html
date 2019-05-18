@@ -6,11 +6,32 @@
 			<comms-card padding="7">
 				<div class="row">
 					<div class="col-xs-2">
-						<a routerLink="/comms/reports/create"
-							class="btn btn-primary btn-fill">
-							<i class="ti-write"></i>
-							Realizar reporte
-						</a>
+						<div class="btn-group" dropdown>
+							<button type="button"
+								dropdownToggle
+								class="btn btn-primary btn-fill dropdown-toggle">
+								<i class="ti-write"></i>
+								Realizar reporte
+								<span class="caret"></span>
+							</button>
+							<ul *dropdownMenu class="dropdown-menu">
+								<li>
+									<a routerLink="/comms/reports/create" [queryParams]="{type: 'GENERATION'}" class="dropdown-item">
+										Generación
+									</a>
+								</li>
+								<li>
+									<a routerLink="/comms/reports/create" [queryParams]="{type: 'DISTRIBUTION'}" class="dropdown-item">
+										Distribución y Subestaciones
+									</a>
+								</li>
+								<li>
+									<a routerLink="/comms/reports/create" [queryParams]="{type: 'PSFV'}" class="dropdown-item">
+										Parques Solares
+									</a>
+								</li>
+							</ul>							
+						</div>
 					</div>
 	
 					<div class="col-xs-10" *ngIf="!detailsShown">

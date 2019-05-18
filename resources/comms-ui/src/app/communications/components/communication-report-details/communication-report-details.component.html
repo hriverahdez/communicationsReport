@@ -6,7 +6,8 @@
 			<label for="exampleFormControlSelect1">Tipo de objetivo:</label>
 			<select class="form-control border-input"
 				name="searchType"
-				[(ngModel)]="searchType">
+				[(ngModel)]="searchType"
+				(ngModelChange)="searchByType()">
 				
 				<option value="">Cualquiera</option>
 				<option value="BATTERY">Batería</option>

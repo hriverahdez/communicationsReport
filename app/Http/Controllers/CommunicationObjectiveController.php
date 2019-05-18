@@ -80,7 +80,7 @@ class CommunicationObjectiveController extends Controller
 			$communicationObjective->delete();
 			return $this->successResponse(null, 204);
 		} catch (\Exception $e) {
-			return $this->errorResponse($e);
+			return $this->errorResponse(null, 500, $e);
 		}
 	}
 }

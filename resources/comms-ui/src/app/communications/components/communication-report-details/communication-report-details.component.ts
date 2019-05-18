@@ -47,7 +47,7 @@ export class CommunicationReportDetailsComponent implements OnInit {
 				debounceTime(300),
 				distinctUntilChanged()
 			)
-			.subscribe(terms => this.search(terms));
+			.subscribe(terms => this.searchByName(terms));
 	}
 
 	getObjectives() {
@@ -65,28 +65,40 @@ export class CommunicationReportDetailsComponent implements OnInit {
 		return labelsClassMap;
 	}
 
-	search(terms) {
-		if (terms !== '') {
-			this.objectives = this.objectives
+	searchByType(objectives = null) {
+		const data = objectives || this.getObjectives();
+
+		if (this.searchType !== '') {
+			this.objectives = data
 				.map(reps => {
 					return reps.filter(rep => {
-						if (this.searchType !== '') {
-							const name = rep.objective_name.toLowerCase().trim();
-
-							return (
-								name.includes(terms) && rep.objective_type === this.searchType
-							);
-						} else {
-							return rep.objective_name
-								.toLowerCase()
-								.trim()
-								.includes(terms);
-						}
+						return rep.objective_type === this.searchType;
 					});
 				})
 				.filter(a => a.length !== 0);
 		} else {
 			this.objectives = this.getObjectives();
+		}
+	}
+
+	searchByName(terms) {
+		if (terms !== '') {
+			this.objectives = this.objectives
+				.map(reps => {
+					return reps.filter(rep => {
+						return rep.objective_name
+							.toLowerCase()
+							.trim()
+							.includes(terms);
+					});
+				})
+				.filter(a => a.length !== 0);
+		} else {
+			this.objectives = this.getObjectives();
+		}
+
+		if (this.searchType !== '') {
+			this.searchByType(this.objectives);
 		}
 	}
 }

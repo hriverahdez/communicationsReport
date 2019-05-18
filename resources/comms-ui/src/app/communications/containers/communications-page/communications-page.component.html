@@ -41,7 +41,7 @@
 					<ul class="list-group" *ngIf="commObj.communication_ways.length > 0; else noItems">
 						<li *ngFor="let way of commObj.communication_ways" class="list-group-item">
 							<span class="badge">{{ way.contact_number || '---' }}</span>
-							{{ formatWayType(way.type) }}
+							<strong>{{ formatWayType(way.type) }}</strong> (Actualizado: {{ way.updated_at | date:'dd/MM/yyyy' }})
 						</li>
 					</ul>
 					<ng-template #noItems>

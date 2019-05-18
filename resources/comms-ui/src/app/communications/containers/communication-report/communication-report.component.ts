@@ -6,6 +6,7 @@ import {
 } from '../../../@core/models';
 import { CommunicationReportSandbox } from '../../communication-report.sandbox';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'comms-communication-report',
@@ -17,11 +18,16 @@ export class CommunicationReportComponent implements OnInit {
 
 	saving$: Observable<boolean>;
 
-	constructor(private sandbox: CommunicationReportSandbox) {}
+	constructor(
+		private sandbox: CommunicationReportSandbox,
+		private route: ActivatedRoute
+	) {}
 
 	ngOnInit() {
 		this.saving$ = this.sandbox.saving$;
-		this.sandbox.loadLatestReports();
+		const params = this.route.snapshot.queryParams;
+
+		this.sandbox.loadLatestReports(params['type']);
 		this.latestReports$ = this.sandbox.latestReports$;
 	}
 
