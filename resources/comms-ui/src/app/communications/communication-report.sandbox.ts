@@ -28,12 +28,6 @@ export class CommunicationReportSandbox {
 
 	latestReports$: Observable<CommunicationsReportSummary>;
 
-	// reports$: Observable<
-	// 	CombinedReportSummaries
-	// > = this.communicationReportsService
-	// 	.getAllReports()
-	// 	.pipe(map((res: ApiResponse<CombinedReportSummaries>) => res.data));
-
 	loading$: Observable<boolean> = this.store$.pipe(
 		select(fromStore.selectReportsLoading)
 	);
@@ -85,7 +79,7 @@ export class CommunicationReportSandbox {
 					console.debug(response);
 					this.router.navigateByUrl('/comms/reports');
 					if (response.status === 400) {
-						window.alert('El reporte de hoy ya fue creado');
+						window.alert('El reporte de hoy ya fue creado para esa categoría');
 					}
 					return of(null);
 				}),

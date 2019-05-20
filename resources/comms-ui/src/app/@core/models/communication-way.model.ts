@@ -11,6 +11,8 @@ export enum CommunicationWayTypes {
 export interface CommunicationWay extends BaseEntity {
 	type?: CommunicationWayTypes;
 	contact_number?: string;
+	active?: boolean;
+	inactive_reason?: string;
 
 	communication_objective_id?: string | number;
 }

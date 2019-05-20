@@ -11,6 +11,7 @@ use App\CommunicationWay;
 use App\Services\StatsService;
 use App\Enums;
 use Carbon\Carbon;
+use App\CommunicationReportRequest;
 
 class CommunicationReportController extends Controller
 {
@@ -51,7 +52,7 @@ class CommunicationReportController extends Controller
 	public function latestReports()
 	{
 
-		$timezone = env('TIMEZONE', '-05:00');
+		$timezone = env('TIMEZONE', 'UTC');
 
 		// Query for the lastest report
 		$lastestReportDateQuery = CommunicationReport
@@ -64,6 +65,7 @@ class CommunicationReportController extends Controller
 			);
 
 		// Filter by objective types (from querystring)
+		$types = [];
 		if (Input::get('types')) {
 			$types = explode(',', Input::get('types'));
 			$lastestReportDateQuery->whereIn('communication_objectives.type', $types);
@@ -79,13 +81,14 @@ class CommunicationReportController extends Controller
 		// sent in the request
 		$lastestReportDate = Carbon::today($timezone);
 
+		
 		// If a report was found
 		if (!is_null($data)) {
 			$lastestReportDate = Carbon::parse($data->date);
 			
 			// Compare that report's date to today.
 			// If the dates match then a report for the type(s) has been already made
-			if (Carbon::today()->setTimezone($timezone)->isSameDay($lastestReportDate->setTimezone($timezone))) {			
+			if (Carbon::today()->setTimezone($timezone)->isSameDay($lastestReportDate)) {			
 				return $this->errorResponse("Today's report has already been created", 400);
 			}
 		}
@@ -98,7 +101,8 @@ class CommunicationReportController extends Controller
 				'communication_objectives.type as objective_type',
 				'communication_ways.id as communication_way_id',
 				'communication_ways.type as way_type',
-				'communication_ways.contact_number'
+				'communication_ways.contact_number',
+				'communication_ways.active'
 			)			
 			->leftjoin(
 				'communication_objectives',
@@ -113,17 +117,62 @@ class CommunicationReportController extends Controller
 				'communication_ways.id'
 			);
 			
-		if (Input::get('types')) {
-			$types = explode(',', Input::get('types'));
-			$query->whereIn('communication_objectives.type', $types);
-		}
-
 		$query
-			->where('date', '=', $lastestReportDate)
-			->orWhere('date', '=', null);
+			->where(function($query) use($lastestReportDate, $types) {
+				$query
+					->where('date', '=', $lastestReportDate)
+					->where('communication_ways.active', 1)
+					->whereIn('communication_objectives.type', $types);
+			})
+			->orWhere(function($query) use($types) {
+				$query
+					->where('date', '=', null)
+					->where('communication_ways.active', 1)
+					->whereIn('communication_objectives.type', $types);
+			});
 
-		$data = $query->get()->groupBy(['communication_objective_id']);
-		return $this->successResponse($data);
+		// if (Input::get('types')) {
+		// 	$types = explode(',', Input::get('types'));
+		// 	$query->whereIn('communication_objectives.type', $types);
+		// }
+
+		// Find all pending requests that were accepted before their report
+		// was created
+		$acceptedRequests = CommunicationReportRequest
+			::where('request_status', 'ACCEPTED_BEFORE_REPORT')
+			->get();
+		
+		$data = $query->get();
+
+		// For every report request
+		foreach ($acceptedRequests as $reportRequest) {
+			
+			$objectiveId = $reportRequest->communication_objective_id;
+			$wayId = $reportRequest->communication_way_id;
+
+			// Try to find the report that the request is referencing
+			$report = $data->first(
+				function($value) use($objectiveId, $wayId) {
+					return (
+						$value->communication_objective_id == $objectiveId
+						&& $value->communication_way_id == $wayId
+					);
+				}
+			);
+
+			// Overwrite the report's data (which would be that of its previous day)
+			// with the data from the report request that was accepted and thus 
+			// takes precedence and is considered more recent
+			if ($report) {
+				$report->updated_from_request = true;
+				$report->updated_from_request_date = Carbon::today($timezone);
+				$report->details = $reportRequest->details;
+				$report->status = $reportRequest->status;				
+			}
+			
+		}
+		
+		return $this->successResponse($data->groupBy(['communication_objective_id']));
 	}
 
 	/**
@@ -138,11 +187,23 @@ class CommunicationReportController extends Controller
 
 		try {
 
-			// foreach ($objectives as $key => $communicationWayReports) {
 			foreach ($reports as $report) {
 				CommunicationReport::create($report);
+
+				// Try to find a previously made request that was handled in the
+				// report being created
+				$reportRequest = CommunicationReportRequest
+					::where('request_status', 'ACCEPTED_BEFORE_REPORT')
+					->where('communication_objective_id', $report['communication_objective_id'])
+					->where('communication_way_id', $report['communication_way_id'])
+					->first();
+				
+				// If found change its status so it won't be processed twice
+				if ($reportRequest) {					
+					$reportRequest->request_status = 'FINALIZED';
+					$reportRequest->save();
+				}
 			}
-			// }
 
 			return $this->successResponse(
 				$this->latestReports()

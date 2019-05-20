@@ -9,7 +9,9 @@ class CommunicationWay extends Model
 	protected $fillable = [
 		'type',
 		'contact_number',
-		'communication_objective_id'
+        'communication_objective_id',
+        'active',
+        'inactive_reason'
     ];
 
     public function communicationObjective()

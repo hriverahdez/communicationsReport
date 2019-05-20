@@ -1,0 +1,49 @@
+<div [formGroup]="reportRequestForm" class="container-fluid">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>
+        Objetivo: <strong>{{ commObjective.name }}</strong>
+        <span class="badge mx-3">{{ formatCommObjectiveType(commObjective.type) }}</span>
+        |
+        Vía con problemas: <strong>{{ formatWayType(commWay.type) }}</strong>
+      </h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Estado *</label>
+        <select class="form-control border-input"
+          name="status"
+          formControlName="status">
+          <option [value]="'GOOD'">Bien</option>
+          <option [value]="'REGULAR'">Regular</option>
+          <option [value]="'BAD'">Mal</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Detalles *</label>
+        <textarea class="form-control border-input"
+          name="details"
+          placeholder="Describa el problema que presenta"
+          formControlName="details" rows="3"></textarea>
+      </div>
+
+      <div class="text-right">
+        <button class="btn btn-fill mx-3 btn-primary"
+          [disabled]="!reportRequestForm.valid"
+          (click)="save(reportRequestForm)">Guardar</button>
+        <button class="btn mx-3 btn-primary"
+          (click)="cancel.emit()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- <pre>
+  {{ reportRequestForm.value | json }}
+</pre> -->

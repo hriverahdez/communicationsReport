@@ -26,6 +26,13 @@ Route::prefix('v1')->group(function () {
 			Route::get('latest', 'CommunicationReportController@latestReports');
 		});
 
+		Route::resource('report_requests', 'CommunicationReportRequestController');
+
+		Route::prefix('report_requests')->group(function () {
+			Route::post('{id}/accept', 'CommunicationReportRequestController@acceptRequest');
+			Route::post('{id}/reject', 'CommunicationReportRequestController@rejectRequest');
+		});
+		
 		Route::prefix('stats')->group(function () {
 			Route::get('daily', 'StatsController@getDailyStats');
 			Route::get('groupTotals', 'StatsController@getGroupsTotalAvailability');

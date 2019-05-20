@@ -4,14 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CommunicationReport extends Model
+class CommunicationReportRequest extends Model
 {
 	protected $fillable = [
 		'status',
 		'details',
 		'date',
-		'updated_from_request',
-		'updated_from_request_date',
+		'request_status',
 		'communication_objective_id',
 		'communication_way_id',
 	];

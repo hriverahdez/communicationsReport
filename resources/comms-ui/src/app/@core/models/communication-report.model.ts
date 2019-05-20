@@ -14,6 +14,8 @@ export interface CommunicationReport extends BaseEntity {
 	objective_type: CommunicationObjectiveTypes;
 	way_type: CommunicationWayTypes;
 	contact_number: string;
+	updated_from_request?: boolean;
+	updated_from_request_date?: string;
 	details: string;
 	date: string;
 	communication_objective_id: string | number;

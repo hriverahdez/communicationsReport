@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CommunicationObjective;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CommunicationObjectiveController extends Controller
 {
@@ -15,7 +16,14 @@ class CommunicationObjectiveController extends Controller
 	public function index()
 	{
 		$objectives = CommunicationObjective::all();
-		foreach ($objectives as $obj) {
+
+		if (Input::get('name')) {
+			$objectives = CommunicationObjective
+				::where('name', 'LIKE', '%'.Input::get('name').'%')
+				->get();
+		}
+
+		foreach ($objectives as $obj) {			
 			$obj->communicationWays; // add child models
 		}
 

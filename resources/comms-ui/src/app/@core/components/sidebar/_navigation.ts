@@ -21,6 +21,7 @@ export const APP_MENU: MenuItem[] = [
 		icon: 'ti-archive',
 		class: ''
 	},
+	{ path: 'requests', title: 'Solicitudes', icon: 'ti-receipt', class: '' },
 	{ path: 'user', title: 'User Profile', icon: 'ti-user', class: '' },
 	{ path: 'typography', title: 'Typography', icon: 'ti-text', class: '' },
 	{ path: 'icons', title: 'Icons', icon: 'ti-pencil-alt2', class: '' },

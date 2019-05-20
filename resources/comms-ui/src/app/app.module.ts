@@ -16,6 +16,7 @@ import { CoreModule } from './@core/core.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { CommunicationsModule } from './communications/communications.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ReportRequestsModule } from './report-requests/report-requests.module';
 
 @NgModule({
 	declarations: [
@@ -34,7 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 		CoreModule.forRoot(),
 		DashboardModule,
-		CommunicationsModule
+		CommunicationsModule,
+		ReportRequestsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

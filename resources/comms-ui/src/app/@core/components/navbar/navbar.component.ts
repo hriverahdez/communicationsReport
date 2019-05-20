@@ -37,6 +37,15 @@ export class NavbarComponent implements OnInit {
 		return activeMenuItem ? activeMenuItem.title : 'Dashboard';
 	}
 
+	getUrl() {
+		let routePath = window.location.pathname;
+		routePath = routePath.substring(1);
+
+		const activeMenuItem = this.menuItems.find(item => item.path === routePath);
+
+		return activeMenuItem ? `/${activeMenuItem.path}` : '/dashboard';
+	}
+
 	sidebarToggle() {
 		var toggleButton = this.toggleButton;
 		var body = document.getElementsByTagName('body')[0];

@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="!selectedCommObjective && !selectedCommWay">
+    <div class="col-xs-12">
+
+      <comms-card>
+        <comms-card-header 
+          title="Crear nueva solicitud"
+          subtitle="Busque por nombre de objetivo de comunicación y haga click en el (+) para crear un reporte a una de sus vía de comunicación"></comms-card-header>
+
+        <comms-card-body>
+
+          <div class="col-12">
+
+            <label for="exampleFormControlSelect1">Criterio de busqueda:</label>
+            <input type="text" 
+              class="form-control border-input" 
+              placeholder="Buscar..."
+              [formControl]="searchInputCtrl">
+              
+          </div>
+
+        </comms-card-body>
+        
+      </comms-card>
+      
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="!selectedCommObjective && !selectedCommWay">
+    <comms-loader *ngIf="loading"></comms-loader>
+    <div *ngFor="let obj of objectives$ | async"
+      class="col-xs-12 col-sm-6 col-md-4">
+      <comms-card>
+        <comms-card-header
+          [title]="obj.name"
+          [subtitle]="formatCommObjectiveType(obj.type)">
+        </comms-card-header>
+        <comms-card-body>
+
+          <ul class="list-group" *ngIf="obj.communication_ways.length > 0; else noItems">
+            <li *ngFor="let way of obj.communication_ways" class="list-group-item">
+              <button class="btn btn-fill btn-sm mr-3 btn-primary"
+                (click)="selectItemToCreateRequest(obj, way)">
+                <i class="ti-plus"></i>
+              </button>
+              <span class="badge">{{ way.contact_number || '---' }}</span>                
+              <strong>{{ formatWayType(way.type) }}</strong>
+            </li>
+          </ul>
+          <ng-template #noItems>
+            <ul class="list-group">
+              <li class="list-group-item text-center">
+                No tiene vías de comunicación
+              </li>
+            </ul>
+          </ng-template>
+          
+        </comms-card-body>
+      </comms-card>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="selectedCommObjective && selectedCommWay">
+
+    <comms-loader 
+      *ngIf="loading"
+      position="absolute"></comms-loader>
+    <comms-card>
+      <comms-card-header
+        title="Crear nueva solicitud">
+        <button 
+          type="button"
+          tooltip="Cerrar"
+          class="btn btn-xs btn-fill btn-danger"
+          (click)="goBackToSearch()">
+          <i class="ti-close"></i>
+        </button>
+      </comms-card-header>
+
+      <comms-card-body>
+        <comms-request-form
+          [commObjective]="selectedCommObjective"
+          [commWay]="selectedCommWay"
+          (create)="createRequest($event)"
+          (cancel)="goBackToSearch()"></comms-request-form>
+      </comms-card-body>
+    </comms-card>
+
+  </div>
+</div>

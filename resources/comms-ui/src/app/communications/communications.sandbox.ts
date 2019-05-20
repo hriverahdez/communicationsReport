@@ -21,4 +21,10 @@ export class CommunicationsSandbox {
 			.items()
 			.pipe(map((res: ApiResponse<CommunicationObjective[]>) => res.data));
 	}
+
+	searchObjectives(terms): Observable<CommunicationObjective[]> {
+		return this.communicationObjectivesService
+			.searchItems(terms)
+			.pipe(map((res: ApiResponse<CommunicationObjective[]>) => res.data));
+	}
 }

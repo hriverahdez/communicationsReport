@@ -4,7 +4,9 @@
 <div class="container-fluid" [formGroup]="childForm">
 	<div class="row">
 		<div class="col-xs-6">
-			<h4 class="title">{{ reportData.name }}</h4>
+			<h4 class="title">
+				{{ reportData.name }}				
+			</h4>
 			<p class="category">{{ formatCommObjectiveType(reportData.type) }}</p>
 		</div>
 		<div class="col-xs-6">
@@ -35,7 +37,18 @@
 
 				<div class="card" [formGroupName]="currentIndex">
 					<div class="card-body">
-						<h5 class="card-title">{{ formatWayType(reportData.ways[currentIndex].way_type) }}</h5>
+						<h5 class="card-title">
+							{{ formatWayType(reportData.ways[currentIndex].way_type) }}
+							
+							<span class="pull-right badge" *ngIf="reportData.ways[currentIndex].status">
+								{{ reportData.ways[currentIndex].updated_from_request ? 'Cambios Solicitados por usuario' : 'Usando datos del reporte previo' }}
+							</span>
+							<span class="pull-right badge" *ngIf="!reportData.ways[currentIndex].status">
+								Reporte nuevo
+							</span>
+							<div class="clearfix"></div>
+							
+						</h5>
 				
 						<div class="form-group">
 							<label for="exampleFormControlSelect1">Estado</label>

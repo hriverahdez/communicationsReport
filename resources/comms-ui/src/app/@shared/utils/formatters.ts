@@ -15,7 +15,7 @@ export const formatWayType = (type: string) => {
 		TRUNKING: 'Trunking',
 		FM: 'FM',
 		INTERNAL_PHONE: 'Teléfono interno',
-		EXTERNAL_PHONE: 'Teléfono ETETCSA',
+		EXTERNAL_PHONE: 'Teléfono ETECSA',
 		CELLPHONE: 'Celular'
 	};
 
